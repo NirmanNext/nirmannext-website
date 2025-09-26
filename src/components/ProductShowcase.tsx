@@ -39,16 +39,16 @@ const ProductShowcase = () => {
 
   const privateLabelProducts = [
     {
-      name: "PlasterKing Pro",
-      category: "Premium Wall Plaster",
-      savings: "25% Cost Savings",
-      features: ["ISO Certified", "In-house Tested", "Professional Grade"],
+      name: "RockGrip Block Adhesives",
+      category: "Premium AAC Block Adhesive",
+      savings: "Upto 20% Cost Savings",
+      features: ["BIS Certified", "In-house Tested", "Professional Grade"],
       rating: 4.8
     },
     {
-      name: "RockGrip Elite", 
+      name: "RockGrip Tile Adhesives", 
       category: "Tile Adhesive",
-      savings: "30% Cost Savings",
+      savings: "Upto 30% Cost Savings",
       features: ["Weather Resistant", "High Bond Strength", "Quick Setting"],
       rating: 4.9
     }
@@ -183,7 +183,7 @@ const ProductShowcase = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <div className="flex items-center text-muted-foreground">
               <Truck className="w-5 h-5 mr-2" />
-              <span>Free delivery on bulk orders</span>
+              <span>Factory Pricing on bulk orders</span>
             </div>
             <div className="flex items-center text-muted-foreground">
               <Shield className="w-5 h-5 mr-2" />

@@ -6,14 +6,14 @@ const BenefitCards = () => {
   const benefits = [
     {
       icon: Hammer,
-      title: "Builders & Contractors",
+      title: "Construction Professionals",
       subtitle: "Build Smarter, Faster, Profitable",
       description: "Cut project costs with bulk pricing, keep timelines on track with reliable delivery, and ease cash flow with flexible 45-day credit.",
       features: [
-        "Bulk pricing up to 30% savings",
-        "45-day flexible credit terms", 
+        "Bulk pricing up to 20% savings",
         "Guaranteed delivery timelines",
-        "Dedicated relationship manager"
+        "Standardized quality",
+        "Flexible credit terms*"
       ],
       cta: "Explore Builder Solutions",
       gradient: "from-primary to-primary/80"
@@ -22,12 +22,12 @@ const BenefitCards = () => {
       icon: Store,
       title: "Retailers & Dealers", 
       subtitle: "Expand Without Risk",
-      description: "Expand without risk — no MOQs, private-label margins, and inventory-free growth opportunities.",
+      description: "Expand without risk — no MOQs, high margins, and inventory-free growth opportunities.",
       features: [
         "No minimum order quantities",
-        "Private label opportunities",
         "Inventory-free business model",
-        "Higher profit margins"
+        "Higher profit margins",
+        "Dedicated sales support"
       ],
       cta: "Join Dealer Network",
       gradient: "from-construction-orange to-construction-orange/80"

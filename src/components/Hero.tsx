@@ -103,19 +103,19 @@ const goToNext = () => {
           {/* Trust Indicators */}
           <div className="flex flex-wrap justify-center items-center gap-8 text-gray-300">
             <div className="text-center">
-              <div className="text-2xl font-bold text-white">10,000+</div>
+              <div className="text-2xl font-bold text-white">10+</div>
               <div className="text-sm">Active Professionals</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-white">₹500Cr+</div>
+              <div className="text-2xl font-bold text-white">₹8L+</div>
               <div className="text-sm">Materials Delivered</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-white">150+</div>
+              <div className="text-2xl font-bold text-white">2+</div>
               <div className="text-sm">Cities Served</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-white">85%</div>
+              <div className="text-2xl font-bold text-white">70%</div>
               <div className="text-sm">Repeat Orders</div>
             </div>
           </div>
