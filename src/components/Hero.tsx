@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Play } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import heroImage from "@/assets/hero-construction.jpg";
 
 const Hero = () => {
@@ -14,12 +15,34 @@ const Hero = () => {
   ];
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentHeadline((prev) => (prev + 1) % headlines.length);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, [headlines.length]);
+  const interval = setInterval(() => {
+    setCurrentHeadline((prev) => (prev + 1) % headlines.length);
+  }, 4000);
 
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (e.key === "ArrowLeft") {
+      setCurrentHeadline((prev) => (prev - 1 + headlines.length) % headlines.length);
+    }
+    if (e.key === "ArrowRight") {
+      setCurrentHeadline((prev) => (prev + 1) % headlines.length);
+    }
+  };
+
+  window.addEventListener("keydown", handleKeyDown);
+
+  return () => {
+    clearInterval(interval);
+    window.removeEventListener("keydown", handleKeyDown);
+  };
+}, [headlines.length]);
+
+const goToPrev = () => {
+  setCurrentHeadline((prev) => (prev - 1 + headlines.length) % headlines.length);
+};
+
+const goToNext = () => {
+  setCurrentHeadline((prev) => (prev + 1) % headlines.length);
+};
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image */}
@@ -36,12 +59,28 @@ const Hero = () => {
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 text-center text-white">
         <div className="max-w-5xl mx-auto">
-          {/* Animated Headline */}
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-            <span className="block animate-fade-in key={currentHeadline}">
-              {headlines[currentHeadline]}
-            </span>
-          </h1>
+          {/* Animated Headline with arrow buttons */}
+          <div className="flex items-center justify-center gap-4 mb-6">
+            <button
+              aria-label="Previous headline"
+              onClick={goToPrev}
+              className="bg-white/10 text-white rounded-full p-2 hover:bg-white/20 transition"
+            >
+              <ChevronLeft size={32} />
+            </button>
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight m-0">
+              <span className="block animate-fade-in key={currentHeadline}">
+                {headlines[currentHeadline]}
+              </span>
+            </h1>
+            <button
+              aria-label="Next headline"
+              onClick={goToNext}
+              className="bg-white/10 text-white rounded-full p-2 hover:bg-white/20 transition"
+            >
+              <ChevronRight size={32} />
+            </button>
+          </div>
           
           {/* Subtext */}
           <p className="text-xl md:text-2xl text-gray-200 mb-8 max-w-3xl mx-auto leading-relaxed">
@@ -55,7 +94,7 @@ const Hero = () => {
               Explore Products
               <ArrowRight className="ml-2" />
             </Button>
-            <Button variant="outline" size="lg" className="min-w-48 text-white border-white/50 hover:bg-white/10">
+            <Button variant="outline" size="lg" className="min-w-48 text-white bg-white/10">
               <Play className="mr-2" />
               Join as a Professional
             </Button>
