@@ -11,14 +11,17 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { db } from "@/lib/firebase"
 import { collection, addDoc, Timestamp } from "firebase/firestore"
-import citiesData from "@/data/IndianStatesCities.json" // import your JSON file
+import citiesData from "@/data/IndianStatesCities.json"
 
 // ✅ TypeScript fix for grecaptcha
 declare global {
   interface Window {
     grecaptcha: {
-      execute: (siteKey: string, options: { action: string }) => Promise<string>
       ready: (cb: () => void) => void
+      execute: (
+        siteKey: string,
+        options: { action: string }
+      ) => Promise<string>
     }
   }
 }
@@ -75,7 +78,9 @@ export function JoinFormDialog({ open, onOpenChange }: JoinFormDialogProps) {
 
     // ✅ Validate city against allowed list
     if (!allowedCities.includes(selectedCity)) {
-      newErrors.city = `We are operational in ${allowedCities.join(", ")}. Coming soon to your city.`
+      newErrors.city = `We are operational in ${allowedCities.join(
+        ", "
+      )}. Coming soon to your city.`
     }
 
     if (Object.keys(newErrors).length > 0) {
@@ -85,11 +90,31 @@ export function JoinFormDialog({ open, onOpenChange }: JoinFormDialogProps) {
     }
 
     try {
-      // ✅ Execute reCAPTCHA v3
-      const token = await window.grecaptcha.execute(
-        import.meta.env.VITE_RECAPTCHA_SITE_KEY,
-        { action: "submit" }
-      )
+      const siteKey = import.meta.env.VITE_RECAPTCHA_SITE_KEY
+
+      // ✅ Run only when grecaptcha is loaded
+      const token = await new Promise<string>((resolve, reject) => {
+        if (!window.grecaptcha) {
+          return reject("reCAPTCHA not loaded")
+        }
+
+        if (!window.grecaptcha) {
+          console.error("❌ reCAPTCHA not available yet")
+        } else {
+          console.log("✅ reCAPTCHA is available, calling ready()")
+        }
+
+
+        window.grecaptcha.ready(() => {
+          window.grecaptcha
+            .execute(siteKey, { action: "submit" })
+            .then(resolve)
+            .catch(reject)
+
+            console.log("✅ grecaptcha.ready triggered")
+
+        })
+      })
 
       if (!token) {
         setErrors({ captcha: "reCAPTCHA verification failed. Try again." })
@@ -115,7 +140,9 @@ export function JoinFormDialog({ open, onOpenChange }: JoinFormDialogProps) {
     } catch (error: any) {
       console.error("Error saving form data:", error)
       setErrors({
-        firestore: `❌ Firestore error: ${error.code || "unknown"} - ${error.message}`,
+        firestore: `❌ Firestore error: ${
+          error.code || "unknown"
+        } - ${error.message}`,
       })
     } finally {
       setLoading(false)
