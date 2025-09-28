@@ -34,9 +34,9 @@ const Professionals = () => {
 
   const comparison = [
     { feature: "Bulk Pricing", traditional: "Limited discounts", nirmanBandhu: "Up to 30% savings" },
-    { feature: "Credit Terms", traditional: "Immediate payment", nirmanBandhu: "45-day credit" },
-    { feature: "Delivery", traditional: "Self-pickup mostly", nirmanBandhu: "Free doorstep delivery" },
-    { feature: "Quality Check", traditional: "Variable standards", nirmanBandhu: "ISO certified quality" },
+    { feature: "Credit Terms", traditional: "Immediate payment", nirmanBandhu: "45-day credit*" },
+    { feature: "Delivery", traditional: "Self-pickup mostly", nirmanBandhu: "Doorstep delivery" },
+    { feature: "Quality Check", traditional: "Variable standards", nirmanBandhu: "BIS certified quality" },
     { feature: "Technical Support", traditional: "Limited guidance", nirmanBandhu: "Expert consultation" },
     { feature: "Project Planning", traditional: "Manual estimation", nirmanBandhu: "Digital tools & calculators" }
   ];

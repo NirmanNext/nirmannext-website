@@ -3,9 +3,11 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Play } from "lucide-react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import heroImage from "@/assets/hero-construction.jpg";
+import { JoinFormDialog } from "@/components/JoinFormDialog"; // ⬅️ Import dialog
 
 const Hero = () => {
   const [currentHeadline, setCurrentHeadline] = useState(0);
+  const [openForm, setOpenForm] = useState(false); // ⬅️ State for form dialog
   
   const headlines = [
     "Powering Every Build — From Homes to High-Rises",
@@ -15,34 +17,35 @@ const Hero = () => {
   ];
 
   useEffect(() => {
-  const interval = setInterval(() => {
-    setCurrentHeadline((prev) => (prev + 1) % headlines.length);
-  }, 4000);
-
-  const handleKeyDown = (e: KeyboardEvent) => {
-    if (e.key === "ArrowLeft") {
-      setCurrentHeadline((prev) => (prev - 1 + headlines.length) % headlines.length);
-    }
-    if (e.key === "ArrowRight") {
+    const interval = setInterval(() => {
       setCurrentHeadline((prev) => (prev + 1) % headlines.length);
-    }
+    }, 4000);
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft") {
+        setCurrentHeadline((prev) => (prev - 1 + headlines.length) % headlines.length);
+      }
+      if (e.key === "ArrowRight") {
+        setCurrentHeadline((prev) => (prev + 1) % headlines.length);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [headlines.length]);
+
+  const goToPrev = () => {
+    setCurrentHeadline((prev) => (prev - 1 + headlines.length) % headlines.length);
   };
 
-  window.addEventListener("keydown", handleKeyDown);
-
-  return () => {
-    clearInterval(interval);
-    window.removeEventListener("keydown", handleKeyDown);
+  const goToNext = () => {
+    setCurrentHeadline((prev) => (prev + 1) % headlines.length);
   };
-}, [headlines.length]);
 
-const goToPrev = () => {
-  setCurrentHeadline((prev) => (prev - 1 + headlines.length) % headlines.length);
-};
-
-const goToNext = () => {
-  setCurrentHeadline((prev) => (prev + 1) % headlines.length);
-};
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image */}
@@ -94,12 +97,17 @@ const goToNext = () => {
               Explore Products
               <ArrowRight className="ml-2" />
             </Button>
-            <Button variant="outline" size="lg" className="min-w-48 text-white bg-white/10">
+            <Button
+              variant="outline"
+              size="lg"
+              className="min-w-48 text-white bg-white/10"
+              onClick={() => setOpenForm(true)} // ⬅️ Open dialog
+            >
               <Play className="mr-2" />
-              Join as a Professional
+              Earn with Us
             </Button>
           </div>
-          
+
           {/* Trust Indicators */}
           <div className="flex flex-wrap justify-center items-center gap-8 text-gray-300">
             <div className="text-center">
@@ -128,6 +136,9 @@ const goToNext = () => {
           <div className="w-1 h-3 bg-white/70 rounded-full mt-2 animate-pulse"></div>
         </div>
       </div>
+
+      {/* Form Dialog */}
+      <JoinFormDialog open={openForm} onOpenChange={setOpenForm} />
     </section>
   );
 };

@@ -337,7 +337,7 @@ const Contact = () => {
               },
               {
                 question: "What quality certifications do you have?",
-                answer: "All our products are ISO certified and tested in our NABL accredited in-house laboratory."
+                answer: "All our products are BIS certified and tested in our in-house laboratory."
               },
               {
                 question: "Do you provide technical support?",

@@ -126,7 +126,7 @@ const ProductShowcase = () => {
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               Our exclusive private-label products deliver premium quality at unbeatable prices, 
-              rigorously tested and ISO certified.
+              rigorously tested and BIS certified.
             </p>
           </div>
           
