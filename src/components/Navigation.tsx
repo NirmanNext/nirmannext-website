@@ -8,7 +8,7 @@ const Navigation = () => {
 
   const navItems = [
     { label: "Products & Brands", href: "/products", isRoute: true },
-    { label: "For Builders & Contractors", href: "/professionals", isRoute: true },
+    { label: "For Construction Professionals", href: "/professionals", isRoute: true },
     { label: "For Retailers & Dealers", href: "/retailers", isRoute: true },
     { label: "Quality & Delivery", href: "/quality", isRoute: true },
     { label: "About Us", href: "/about", isRoute: true },
