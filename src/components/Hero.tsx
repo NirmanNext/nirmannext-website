@@ -4,6 +4,7 @@ import { ArrowRight, Play } from "lucide-react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import heroImage from "@/assets/hero-construction.jpg";
 import { JoinFormDialog } from "@/components/JoinFormDialog"; // ⬅️ Import dialog
+import { Link } from "react-router-dom"; // ⬅️ Import Link for navigation
 
 const Hero = () => {
   const [currentHeadline, setCurrentHeadline] = useState(0);
@@ -93,10 +94,12 @@ const Hero = () => {
           
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-            <Button variant="hero" size="lg" className="min-w-48">
-              Explore Products
-              <ArrowRight className="ml-2" />
-            </Button>
+            <Link to="/products">
+              <Button variant="hero" size="lg" className="min-w-48">
+                Explore Products
+                <ArrowRight className="ml-2" />
+              </Button>
+            </Link>
             <Button
               variant="outline"
               size="lg"

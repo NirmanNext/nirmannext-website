@@ -85,11 +85,21 @@ export function JoinFormDialog({ open, onOpenChange }: JoinFormDialogProps) {
     }
 
     try {
-      // ✅ Execute reCAPTCHA v3
-      const token = await window.grecaptcha.execute(
-        import.meta.env.VITE_RECAPTCHA_SITE_KEY,
-        { action: "submit" }
-      )
+      // ✅ Wait for reCAPTCHA script
+      const token = await new Promise<string>((resolve, reject) => {
+        if (!window.grecaptcha) {
+          reject(new Error("reCAPTCHA not loaded"))
+          return
+        }
+        window.grecaptcha.ready(() => {
+          window.grecaptcha
+            .execute(import.meta.env.VITE_RECAPTCHA_SITE_KEY, {
+              action: "submit",
+            })
+            .then(resolve)
+            .catch(reject)
+        })
+      })
 
       if (!token) {
         setErrors({ captcha: "reCAPTCHA verification failed. Try again." })
@@ -115,7 +125,9 @@ export function JoinFormDialog({ open, onOpenChange }: JoinFormDialogProps) {
     } catch (error: any) {
       console.error("Error saving form data:", error)
       setErrors({
-        firestore: `❌ Firestore error: ${error.code || "unknown"} - ${error.message}`,
+        firestore: `❌ Firestore error: ${error.code || "unknown"} - ${
+          error.message
+        }`,
       })
     } finally {
       setLoading(false)
@@ -230,6 +242,21 @@ export function JoinFormDialog({ open, onOpenChange }: JoinFormDialogProps) {
                 <p className="text-red-600 text-sm">{errors.city}</p>
               )}
             </div>
+            
+            {/* PIN Code */}
+              <div>
+                <Label htmlFor="pincode">PIN Code</Label>
+                <Input
+                  id="pincode"
+                  type="text"
+                  name="pincode"
+                  placeholder="6-digit PIN code"
+                  required
+                />
+                {errors.pincode && (
+                  <p className="text-red-600 text-sm">{errors.pincode}</p>
+                )}
+              </div>
           </div>
 
           {/* reCAPTCHA error display */}
