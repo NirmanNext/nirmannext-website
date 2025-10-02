@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { CheckCircle, TrendingUp, Clock, Calculator, Users, Award } from "lucide-react";
 import { useState } from "react";
 import { JoinFormDialog } from "@/components/JoinFormDialog";
-import ROICalculator from "@/components/ROICalculator";
+// import ROICalculator from "@/components/ROICalculator";
 
 
 const Professionals = () => {
