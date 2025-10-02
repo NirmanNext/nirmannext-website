@@ -5,7 +5,7 @@ import {
   IPricingDataService,
   Product,
   Freight
-} from "@/services/PricingDataService";
+} from "@/services/pricingDataService";
 
 const ROICalculator = () => {
   // --------------------
