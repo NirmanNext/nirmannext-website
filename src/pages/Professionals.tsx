@@ -3,8 +3,13 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle, TrendingUp, Clock, Calculator, Users, Award } from "lucide-react";
+import { useState } from "react";
+import { JoinFormDialog } from "@/components/JoinFormDialog";
+// import ROICalculator from "@/components/ROICalculator";
+
 
 const Professionals = () => {
+  const [openForm, setOpenForm] = useState(false);
   const benefits = [
     {
       icon: TrendingUp,
@@ -34,12 +39,13 @@ const Professionals = () => {
 
   const comparison = [
     { feature: "Bulk Pricing", traditional: "Limited discounts", nirmanBandhu: "Up to 30% savings" },
-    { feature: "Credit Terms", traditional: "Immediate payment", nirmanBandhu: "45-day credit*" },
+    { feature: "Credit Terms", traditional: "Immediate payment", nirmanBandhu: "45-day credit*", tooltip: "Credit available for verified contractors; T&C apply" },
     { feature: "Delivery", traditional: "Self-pickup mostly", nirmanBandhu: "Doorstep delivery" },
-    { feature: "Quality Check", traditional: "Variable standards", nirmanBandhu: "BIS certified quality" },
+    { feature: "Quality Check", traditional: "Variable standards", nirmanBandhu: "BIS certified quality*", tooltip: "*Performance may vary by site conditions."  },
     { feature: "Technical Support", traditional: "Limited guidance", nirmanBandhu: "Expert consultation" },
     { feature: "Project Planning", traditional: "Manual estimation", nirmanBandhu: "Digital tools & calculators" }
   ];
+
 
   return (
     <div className="min-h-screen bg-background">
@@ -60,12 +66,15 @@ const Professionals = () => {
               competitive pricing, and reliable delivery that keeps projects on track.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-primary hover:bg-primary/90">
+              <Button size="lg"
+                className="bg-primary hover:bg-primary/90"
+                onClick={() => setOpenForm(true)} // ⬅️ Opens form
+              >
                 Join as Professional Partner
               </Button>
-              <Button size="lg" variant="outline">
+              {/* <Button size="lg" variant="outline">
                 Calculate Your Savings
-              </Button>
+              </Button> */}
             </div>
           </div>
         </div>
@@ -132,7 +141,17 @@ const Professionals = () => {
                         <td className="p-4">
                           <div className="flex items-center gap-2">
                             <CheckCircle className="h-4 w-4 text-green-600" />
-                            <span className="text-primary font-medium">{item.nirmanBandhu}</span>
+                            {item.tooltip ? (
+                              <span className="relative group text-primary font-medium cursor-pointer">
+                                {item.nirmanBandhu}
+                                {/* Tooltip */}
+                                <span className="absolute left-full top-1/2 -translate-y-1/2 ml-3 w-36 p-2 text-sm text-white bg-gray-800 rounded opacity-0 group-hover:opacity-80 transition-opacity z-10">
+                                  {item.tooltip}
+                                </span>
+                              </span>
+                            ) : (
+                              <span className="text-primary font-medium">{item.nirmanBandhu}</span>
+                            )}
                           </div>
                         </td>
                       </tr>
@@ -145,28 +164,15 @@ const Professionals = () => {
         </div>
       </section>
 
-      {/* ROI Calculator CTA */}
-      <section className="py-16">
+      {/* ROI Calculator Section */}
+      {/* <section className="py-16">
         <div className="container mx-auto px-4">
-          <Card className="max-w-4xl mx-auto bg-gradient-primary text-primary-foreground">
-            <CardContent className="p-12 text-center">
-              <Calculator className="h-16 w-16 mx-auto mb-6 opacity-90" />
-              <h2 className="text-3xl font-bold mb-4">Calculate Your Project Savings</h2>
-              <p className="text-xl mb-8 opacity-90">
-                See how much you can save on your next project with our bulk pricing and efficient delivery
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" variant="secondary">
-                  Launch ROI Calculator
-                </Button>
-                <Button size="lg" variant="outline" className="bg-transparent border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
-                  Request Custom Quote
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
+          <ROICalculator />
         </div>
-      </section>
+      </section> */}
+
+
+
 
       {/* Partner Stories */}
       <section className="py-16 bg-accent/30">
@@ -229,10 +235,15 @@ const Professionals = () => {
           <p className="text-xl mb-8 opacity-90">
             Join the NirmanBandhu network and start building smarter today
           </p>
-          <Button size="lg" variant="secondary">
+          <Button size="lg" variant="secondary"
+          onClick={() => setOpenForm(true)} // ⬅️ Opens form
+          >
             Become a Partner Today
           </Button>
         </div>
+
+        {/* Form Dialog */}
+      <JoinFormDialog open={openForm} onOpenChange={setOpenForm} />
       </section>
     </div>
   );

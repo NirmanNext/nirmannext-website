@@ -108,6 +108,17 @@ All colors MUST be HSL.
   }
 }
 
+@layer utilities {
+  .bg-gradient-primary {
+    background: var(--gradient-hero);
+  }
+
+  .shadow-elevated {
+    box-shadow: var(--shadow-elevated);
+  }
+}
+
+
 @layer base {
   * {
     @apply border-border;
