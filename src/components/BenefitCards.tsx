@@ -96,10 +96,10 @@ const BenefitCards = () => {
                   </ul>
                   
                   {/* CTA Button */}
-                  <Button variant="outline" className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300">
+                  {/* <Button variant="outline" className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300">
                     {benefit.cta}
                     <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform duration-300" />
-                  </Button>
+                  </Button> */}
                 </CardContent>
               </Card>
             );
