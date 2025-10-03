@@ -12,55 +12,59 @@ const Contact = () => {
     {
       icon: Phone,
       title: "Phone Support",
-      primary: "+91 1800-NIRMAN (647626)",
+      primary: "+91 981 999 2488",
       secondary: "Available 24/7 for urgent queries",
-      action: "Call Now"
+      action: "Call Now",
+      href: "tel:+919819992488"
     },
     {
       icon: Mail,
       title: "Email Support",
       primary: "support@nirmannext.com",
       secondary: "Response within 4 hours",
-      action: "Send Email"
-    },
-    {
-      icon: MessageCircle,
-      title: "Live Chat",
-      primary: "Instant messaging support",
-      secondary: "Available 9 AM - 9 PM",
-      action: "Start Chat"
-    },
-    {
-      icon: MapPin,
-      title: "Office Visit",
-      primary: "Schedule an appointment",
-      secondary: "Mumbai, Delhi, Bangalore offices",
-      action: "Book Visit"
+      action: "Send Email",
+      href: "mailto:support@nirmannext.com"
     }
+    // ,
+    // {
+    //   icon: MessageCircle,
+    //   title: "Live Chat",
+    //   primary: "Instant messaging support",
+    //   secondary: "Available 9 AM - 9 PM",
+    //   action: "Start Chat"
+    // },
+    // {
+    //   icon: MapPin,
+    //   title: "Office Visit",
+    //   primary: "Schedule an appointment",
+    //   secondary: "Lucknow office",
+    //   action: "Book Visit"
+    // }
   ];
 
   const offices = [
     {
-      city: "Mumbai (Head Office)",
-      address: "Tower A, Business Park, Andheri East, Mumbai - 400069",
-      phone: "+91 22 4567 8900",
-      email: "mumbai@nirmannext.com",
-      hours: "Mon-Sat: 9 AM - 7 PM"
-    },
-    {
-      city: "Delhi",
-      address: "Sector 18, Cyber Hub, Gurugram, Haryana - 122015",
-      phone: "+91 11 4567 8900",
-      email: "delhi@nirmannext.com",
-      hours: "Mon-Sat: 9 AM - 7 PM"
-    },
-    {
-      city: "Bangalore",
-      address: "Electronic City Phase 1, Bangalore, Karnataka - 560100",
-      phone: "+91 80 4567 8900",
-      email: "bangalore@nirmannext.com",
-      hours: "Mon-Sat: 9 AM - 7 PM"
+      city: "Lucknow (Head Office)",
+      address: "2nd Floor, Cyber Heights, Vibhuti Khand, Gomti Nagar,Lucknow, 226010",
+      phone: "+91 981 999 2488",
+      email: "admin@nirmannext.com",
+      hours: "Mon-Fri: 9 AM - 7 PM"
     }
+    // ,
+    // {
+    //   city: "Delhi",
+    //   address: "Sector 18, Cyber Hub, Gurugram, Haryana - 122015",
+    //   phone: "+91 11 4567 8900",
+    //   email: "delhi@nirmannext.com",
+    //   hours: "Mon-Sat: 9 AM - 7 PM"
+    // },
+    // {
+    //   city: "Bangalore",
+    //   address: "Electronic City Phase 1, Bangalore, Karnataka - 560100",
+    //   phone: "+91 80 4567 8900",
+    //   email: "bangalore@nirmannext.com",
+    //   hours: "Mon-Sat: 9 AM - 7 PM"
+    // }
   ];
 
   const departments = [
@@ -89,14 +93,16 @@ const Contact = () => {
               Our expert team is ready to assist you 24/7.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-primary hover:bg-primary/90">
-                <Phone className="h-5 w-5 mr-2" />
-                Call Support Now
-              </Button>
-              <Button size="lg" variant="outline">
+              <a href="tel:+919819992488" style={{ textDecoration: 'none' }}>
+                <Button size="lg" className="bg-primary hover:bg-primary/90">
+                  <Phone className="h-5 w-5 mr-2" />
+                  Call Support Now
+                </Button>
+              </a>
+              {/* <Button size="lg" variant="outline">
                 <MessageCircle className="h-5 w-5 mr-2" />
                 Start Live Chat
-              </Button>
+              </Button> */}
             </div>
           </div>
         </div>
@@ -112,7 +118,7 @@ const Contact = () => {
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
             {contactMethods.map((method) => {
               const IconComponent = method.icon;
               return (
@@ -126,9 +132,17 @@ const Contact = () => {
                   </CardHeader>
                   <CardContent>
                     <p className="text-sm text-muted-foreground mb-4">{method.secondary}</p>
-                    <Button variant="outline" size="sm" className="w-full">
-                      {method.action}
-                    </Button>
+                    {method.href ? (
+                      <a href={method.href} style={{ textDecoration: 'none' }}>
+                        <Button variant="outline" size="sm" className="w-full">
+                          {method.action}
+                        </Button>
+                      </a>
+                    ) : (
+                      <Button variant="outline" size="sm" className="w-full">
+                        {method.action}
+                      </Button>
+                    )}
                   </CardContent>
                 </Card>
               );
@@ -138,6 +152,7 @@ const Contact = () => {
       </section>
 
       {/* Contact Form */}
+      {/* commenting out this entire section- not need currently 
       <section className="py-16 bg-accent/30">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
@@ -150,8 +165,9 @@ const Contact = () => {
             
             <Card className="overflow-hidden">
               <CardContent className="p-8">
-                <div className="grid md:grid-cols-2 gap-8">
+                <div className="grid md:grid-cols-2 gap-8">*/}
                   {/* Contact Form */}
+                  {/* commenting out this entire section- not need currently
                   <div>
                     <form className="space-y-6">
                       <div className="grid md:grid-cols-2 gap-4">
@@ -218,9 +234,10 @@ const Contact = () => {
                         Send Message
                       </Button>
                     </form>
-                  </div>
+                  </div>*/}
                   
                   {/* Quick Support */}
+                  {/* commenting out this entire section- not need currently
                   <div>
                     <h3 className="text-xl font-bold mb-6">Quick Support by Department</h3>
                     <div className="space-y-4">
@@ -260,7 +277,7 @@ const Contact = () => {
             </Card>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Office Locations */}
       <section className="py-16">
@@ -301,9 +318,15 @@ const Contact = () => {
                     <Clock className="h-4 w-4 text-primary" />
                     <span className="text-sm">{office.hours}</span>
                   </div>
+                  <a
+                    href="https://www.google.com/maps?rlz=1C1CHBD_enIN1123IN1123&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIICAEQABgNGB4yCggCEAAYCBgNGB4yCggDEAAYgAQYogQyCggEEAAYgAQYogQyBggFEEUYPDIGCAYQRRg8MgYIBxBFGDzSAQg1MDM1ajBqNKgCALACAQ&um=1&ie=UTF-8&fb=1&gl=in&sa=X&geocode=KT2eU8gI45s5MQsIO-8cKqxj&daddr=2nd+Floor,+Cyber+Heights,+Vibhuti+Khand,+Gomti+Nagar,+Lucknow,+Uttar+Pradesh+226010"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  > 
                   <Button variant="outline" size="sm" className="w-full mt-4">
                     Get Directions
                   </Button>
+                  </a>
                 </CardContent>
               </Card>
             ))}
@@ -357,11 +380,11 @@ const Contact = () => {
             ))}
           </div>
           
-          <div className="text-center mt-8">
+          {/* <div className="text-center mt-8">
             <Button variant="outline">
               View All FAQs
             </Button>
-          </div>
+          </div> */}
         </div>
       </section>
 
@@ -373,14 +396,16 @@ const Contact = () => {
             Our support team is available 24/7 to help you with any queries or concerns
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="tel:+919819992488" style={{ textDecoration: 'none' }}>
             <Button size="lg" variant="secondary">
               <Phone className="h-5 w-5 mr-2" />
-              Call Support: 1800-NIRMAN
+              Call Support
             </Button>
-            <Button size="lg" variant="outline" className="bg-transparent border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
+            </a>
+            {/* <Button size="lg" variant="outline" className="bg-transparent border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
               <MessageCircle className="h-5 w-5 mr-2" />
               Start Live Chat
-            </Button>
+            </Button> */}
           </div>
         </div>
       </section>

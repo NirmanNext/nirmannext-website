@@ -52,15 +52,15 @@ const Navigation = () => {
             ))}
           </div>
 
-          {/* CTA Buttons */}
-          <div className="hidden md:flex items-center space-x-3">
+          {/* CTA Buttons - not required now */}
+          {/* <div className="hidden md:flex items-center space-x-3">
             <Button variant="ghost" size="sm">
               Sign In
             </Button>
             <Button variant="construction" size="sm">
               Get Started
             </Button>
-          </div>
+          </div> */}
 
           {/* Mobile Menu Toggle */}
           <button
