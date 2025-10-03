@@ -1,0 +1,11 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Allow creating joinRequests docs without auth
+    match /joinRequests/{docId} {
+      allow create: if true;  // 🚨 development only
+      allow read: if true;
+    }
+  }
+}

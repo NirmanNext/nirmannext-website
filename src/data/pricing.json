@@ -1,0 +1,23 @@
+[
+  {
+    "product": "RockGrip T01",
+    "marketPrice": 320,
+    "rockGripPrice": 280,
+    "dealerPrice": 200,
+    "masonCoupon": 15
+  },
+  {
+    "product": "RockGrip T02",
+    "marketPrice": 450,
+    "rockGripPrice": 380,
+    "dealerPrice": 280,
+    "masonCoupon": 20
+  },
+  {
+    "product": "RockGrip T03",
+    "marketPrice": 800,
+    "rockGripPrice": 620,
+    "dealerPrice": 400,
+    "masonCoupon": 30
+  }
+]

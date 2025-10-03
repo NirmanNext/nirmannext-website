@@ -34,21 +34,21 @@ const TrustSignals = () => {
   const stats = [
     {
       icon: Users,
-      number: "10,000+",
+      number: "10+",
       label: "Active Professionals",
-      growth: "+150% this year"
+      growth: "15x this year"
     },
     {
       icon: TrendingUp,
-      number: "₹500Cr+",
+      number: "₹8L+",
       label: "Materials Delivered",
-      growth: "+200% YoY"
+      growth: "+48% MoM"
     },
     {
       icon: Award,
-      number: "150+",
+      number: "2+",
       label: "Cities Served",
-      growth: "Expanding daily"
+      growth: "Expanding quartely"
     }
   ];
 
@@ -64,7 +64,7 @@ const TrustSignals = () => {
         {/* Growth Stats */}
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
-            Trusted by Thousands of Professionals
+            Trusted by Professionals
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-12">
             Join a growing community of contractors, retailers, and builders who have transformed 
