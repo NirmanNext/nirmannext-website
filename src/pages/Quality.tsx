@@ -8,21 +8,21 @@ const Quality = () => {
   const qualityStandards = [
     {
       icon: Shield,
-      title: "ISO 9001:2015 Certified",
-      description: "International quality management standards ensure consistent excellence",
-      certification: "Valid until 2026"
+      title: "ISI Certified Private Label",
+      description: "Indian standards compliance for all tile adhesives and grouts",
+      certification: "BIS"
     },
     {
       icon: Award,
       title: "In-House Testing Lab",
-      description: "Every batch tested for strength, durability, and compliance before dispatch",
-      certification: "NABL Accredited"
+      description: "Every batch tested for strength, and durability before dispatch",
+      certification: "BIS Accredited"
     },
     {
       icon: CheckCircle,
       title: "Material Traceability",
       description: "Complete tracking from manufacturing source to your doorstep",
-      certification: "Blockchain Verified"
+      certification: "Digitally Verified"
     },
     {
       icon: Shield,
@@ -35,20 +35,20 @@ const Quality = () => {
   const deliveryFeatures = [
     {
       icon: Truck,
-      title: "Pan-India Coverage",
-      description: "Reliable delivery to 500+ cities across India",
+      title: "Pan-UP Coverage",
+      description: "10+ cities across UP",
       highlight: "Same-day delivery in metros"
     },
     {
       icon: Clock,
       title: "Time-Bound Delivery",
-      description: "Committed delivery schedules with penalty clauses",
+      description: "Committed delivery schedules",
       highlight: "98.5% on-time delivery"
     },
     {
       icon: MapPin,
       title: "Real-Time Tracking",
-      description: "Track your order from warehouse to construction site",
+      description: "warehouse to site",
       highlight: "Live GPS tracking"
     }
   ];
@@ -62,7 +62,7 @@ const Quality = () => {
     },
     {
       step: "2",
-      title: "Production Quality Control",
+      title: "Production QC",
       description: "Continuous monitoring during manufacturing process",
       tests: ["Batch consistency", "Process parameters", "Interim quality checks"]
     },
@@ -193,10 +193,10 @@ const Quality = () => {
           
           <div className="grid md:grid-cols-4 gap-8 max-w-4xl mx-auto">
             {[
-              { metric: "99.2%", label: "Quality Pass Rate", description: "Products meeting quality standards" },
+              { metric: "99%+", label: "Quality Pass Rate", description: "Products meeting quality standards" },
               { metric: "< 0.1%", label: "Defect Rate", description: "Industry-leading quality control" },
               { metric: "24hrs", label: "Quality Response", description: "Average resolution time for quality issues" },
-              { metric: "ISO 9001", label: "Certification", description: "International quality management" }
+              { metric: "IS 15477", label: "Certification", description: "Bureau of Indian Standards (BIS)" }
             ].map((stat) => (
               <Card key={stat.label} className="text-center">
                 <CardContent className="p-6">
@@ -245,7 +245,7 @@ const Quality = () => {
       </section>
 
       {/* Delivery Network Map */}
-      <section className="py-16">
+      {/*<section className="py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <Card className="bg-gradient-primary text-primary-foreground">
@@ -278,6 +278,7 @@ const Quality = () => {
           </div>
         </div>
       </section>
+      */}
 
       {/* Quality Guarantee */}
       <section className="py-16 bg-accent/30">
@@ -299,19 +300,19 @@ const Quality = () => {
                 <ul className="space-y-3">
                   <li className="flex items-start gap-2">
                     <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
-                    <span>100% replacement for quality defects within 30 days</span>
+                    <span>100% Replacement for manufacturing defects on our private labels within 30 days</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
-                    <span>Technical support for product application and usage</span>
+                    <span>Technical guidance on product application and usage</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
-                    <span>Performance warranty as per industry standards</span>
+                    <span>Performance assurance as per industry standards</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
-                    <span>Dedicated quality helpline for immediate assistance</span>
+                    <span>Dedicated helpline for quality-related support</span>
                   </li>
                 </ul>
               </CardContent>
@@ -326,7 +327,7 @@ const Quality = () => {
                 <ul className="space-y-3">
                   <li className="flex items-start gap-2">
                     <CheckCircle className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
-                    <span>Committed delivery dates with penalty for delays</span>
+                    <span>Committed delivery dates</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
@@ -348,6 +349,7 @@ const Quality = () => {
       </section>
 
       {/* CTA Section */}
+      {/* commenting this section for now 
       <section className="py-16 bg-primary text-primary-foreground">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-4">Experience Quality You Can Trust</h2>
@@ -364,6 +366,7 @@ const Quality = () => {
           </div>
         </div>
       </section>
+      */}
     </div>
   );
 };
