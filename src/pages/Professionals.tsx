@@ -188,21 +188,21 @@ const Professionals = () => {
             {[
               {
                 name: "Rajesh Construction",
-                location: "Mumbai",
-                project: "50-unit residential complex",
-                savings: "₹2.3L saved",
+                location: "Lucknow",
+                project: "Multi-unit residential complex",
+                savings: "₹1.3L saved",
                 quote: "NirmanNext's bulk pricing helped us stay within budget while maintaining quality standards."
               },
               {
                 name: "Sharma Builders",
-                location: "Delhi",
+                location: "Lucknow",
                 project: "Commercial office building",
                 savings: "25% cost reduction",
                 quote: "The 45-day credit terms were a game-changer for our cash flow management."
               },
               {
                 name: "Green Architecture",
-                location: "Bangalore",
+                location: "Kanpur",
                 project: "Sustainable housing project",
                 savings: "On-time delivery",
                 quote: "Reliable delivery schedule kept our entire project timeline on track."

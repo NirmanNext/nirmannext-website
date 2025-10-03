@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { Link } from "react-router-dom";
+import Logo from "@/assets/company-logo.webp"; // adjust path to your logo file
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -18,19 +19,24 @@ const Navigation = () => {
   return (
     <nav className="bg-background/95 backdrop-blur-sm border-b border-border sticky top-0 z-50">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-22">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-hero rounded-lg flex items-center justify-center">
+            {/* <div className="w-8 h-8 bg-gradient-hero rounded-lg flex items-center justify-center">
               <span className="text-primary-foreground font-bold text-sm">N</span>
             </div>
             <span className="font-display font-bold text-xl text-foreground">
               NirmanNext
-            </span>
+            </span> */}
+            <img 
+              src={Logo} 
+              alt="NirmanNext Logo" 
+              className="h-20 w-auto" // adjust size as needed
+            />  
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-8">
+          <div className="hidden lg:flex items-center space-x-12">
             {navItems.map((item) => (
               item.isRoute ? (
                 <Link

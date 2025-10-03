@@ -4,8 +4,11 @@
   import { Badge } from "@/components/ui/badge";
   import { Users, Target, Award, TrendingUp, Building, Heart } from "lucide-react";
   import { Link } from "react-router-dom"; // ⬅️ Import Link for navigation
+  import { JoinFormDialog } from "@/components/JoinFormDialog"; 
+  import { useState } from "react";
 
   const About = () => {
+    const [openForm, setOpenForm] = useState(false);
     const milestones = [
       { year: "2023", title: "Company Founded", description: "Started with a vision to digitize construction materials supply" },
       { year: "2024", title: "First 50 Partners", description: "Built initial network of contractors and suppliers" },
@@ -41,6 +44,7 @@
     const team = [
       {
         name: "Mohammad Ali",
+        linkedin:"https://www.linkedin.com/in/mohammadalicse/",
         role: "Founder & CEO",
         experience: "8+ years in product engineering and launches",
         background: "Former Software Engineer at a US based Fintech Firm",
@@ -48,6 +52,7 @@
       },
       {
         name: "Amit Verma",
+        linkedin:"https://www.linkedin.com/in/amitvermacse/",
         role: "Co-Founder & CTO",
         experience: "8+ years in Software Engineering",
         background: "IIT-M, Ex-Enphase Energy",
@@ -219,7 +224,11 @@
                         {member.name.split(' ').map(n => n[0]).join('')}
                       </span>
                     </div>
-                    <CardTitle className="text-lg">{member.name}</CardTitle>
+                    <CardTitle className="text-lg">
+                      <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="hover:underline text-primary">
+                        {member.name}
+                      </a>
+                    </CardTitle>
                     <CardDescription className="font-medium text-primary">
                       {member.role}
                     </CardDescription>
@@ -249,7 +258,7 @@
               {[
                 { number: "50+", label: "Projects Completed", description: "Construction projects powered by our materials" },
                 { number: "100+", label: "Partner Network", description: "Professionals, retailers, and suppliers" },
-                { number: "5", label: "Cities Covered", description: "Pan-State presence and growing" },
+                { number: "10+", label: "Cities Covered", description: "Pan-State presence and growing" },
                 { number: "95%+", label: "Customer Satisfaction", description: "Based on verified customer reviews" }
               ].map((stat) => (
                 <Card key={stat.label} className="text-center">
@@ -322,7 +331,9 @@
               we're here to support your success with quality materials and reliable service.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" variant="secondary">
+              <Button size="lg" variant="secondary"
+                onClick={() => setOpenForm(true)} // ⬅️ Opens form
+              >
                 Partner with Us
               </Button>
               <Link to="/Contact">
@@ -332,6 +343,8 @@
               </Link>
             </div>
           </div>
+            {/* Form Dialog */}
+          <JoinFormDialog open={openForm} onOpenChange={setOpenForm} />
         </section>
       </div>
     );

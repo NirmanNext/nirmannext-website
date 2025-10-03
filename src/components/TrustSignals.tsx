@@ -8,7 +8,7 @@ const TrustSignals = () => {
     {
       name: "Rajesh Kumar",
       role: "Site Contractor",
-      company: "Mumbai Construction Co.",
+      // company: "Mumbai Construction Co.",
       rating: 5,
       quote: "NirmanNext has transformed how we manage our material procurement. The bulk pricing and 45-day credit has improved our cash flow significantly. We've saved over ₹2L in the last quarter alone.",
       impact: "₹2L+ saved in Q1"
@@ -16,7 +16,7 @@ const TrustSignals = () => {
     {
       name: "Priya Sharma", 
       role: "Material Retailer",
-      company: "Sharma Building Supplies",
+      // company: "Sharma Building Supplies",
       rating: 5,
       quote: "The private label opportunity has been a game-changer. No inventory risk, better margins, and my customers love the quality. My business has grown 40% since joining NirmanNext.",
       impact: "40% business growth"
@@ -24,7 +24,7 @@ const TrustSignals = () => {
     {
       name: "Amit Patel",
       role: "Architect",
-      company: "Design Studio Architects",
+      // company: "Design Studio Architects",
       rating: 5,
       quote: "Quality consistency and delivery reliability are crucial for our projects. NirmanNext has never let us down. The material specifications are always accurate and delivery is always on time.",
       impact: "100% on-time delivery"
@@ -34,27 +34,27 @@ const TrustSignals = () => {
   const stats = [
     {
       icon: Users,
-      number: "10+",
+      number: "50+",
       label: "Active Professionals",
-      growth: "15x this year"
+      growth: "10x this year"
     },
     {
       icon: TrendingUp,
-      number: "₹8L+",
+      number: "100 Ton+",
       label: "Materials Delivered",
-      growth: "+48% MoM"
+      growth: "+35% MoM"
     },
     {
       icon: Award,
-      number: "2+",
+      number: "10+",
       label: "Cities Served",
-      growth: "Expanding quartely"
+      growth: "Expanding quarterly"
     }
   ];
 
   const partners = [
-    "UltraTech", "ACC Limited", "Ambuja Cement", "JSW Steel", 
-    "Tata Steel", "Asian Paints", "Berger Paints", "Kajaria"
+    "RockGrip", "ACC Limited", "Tata Steel",
+    "Asian Paints", "Berger Paints", "Pidilite"
   ];
 
   return (
@@ -138,7 +138,7 @@ const TrustSignals = () => {
                   <div className="border-t pt-6">
                     <div className="font-semibold text-foreground">{testimonial.name}</div>
                     <div className="text-sm text-muted-foreground">{testimonial.role}</div>
-                    <div className="text-xs text-muted-foreground">{testimonial.company}</div>
+                    {/* <div className="text-xs text-muted-foreground">{testimonial.company}</div> */}
                   </div>
                 </CardContent>
               </Card>
@@ -146,12 +146,12 @@ const TrustSignals = () => {
           </div>
           
           {/* Video CTA */}
-          <div className="text-center">
+          {/* <div className="text-center">
             <Button variant="outline" size="lg" className="group">
               <Play className="mr-2 group-hover:scale-110 transition-transform duration-300" />
               Watch Customer Success Stories
             </Button>
-          </div>
+          </div> */}
         </div>
 
         {/* Partner Logos */}
