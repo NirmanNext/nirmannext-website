@@ -3,8 +3,11 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { TrendingUp, Package, Shield, Zap, Store, HandHeart } from "lucide-react";
+import { JoinFormDialog } from "@/components/JoinFormDialog";
+import { useState } from "react";
 
 const Retailers = () => {
+  const [openForm, setOpenForm] = useState(false);
   const benefits = [
     {
       icon: Package,
@@ -78,12 +81,14 @@ const Retailers = () => {
               without inventory investment and earn higher margins.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-primary hover:bg-primary/90">
+              <Button size="lg" className="bg-primary hover:bg-primary/90"
+              onClick={() => setOpenForm(true)} // ⬅️ Opens form
+              >
                 Become a Partner Dealer
               </Button>
-              <Button size="lg" variant="outline">
+              {/* <Button size="lg" variant="outline">
                 Download Partner Brochure
-              </Button>
+              </Button> */}
             </div>
           </div>
         </div>
@@ -295,14 +300,18 @@ const Retailers = () => {
             Join hundreds of successful retailers already partnering with NirmanNext
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" variant="secondary">
+            <Button size="lg" variant="secondary"
+            onClick={() => setOpenForm(true)} // ⬅️ Opens form
+            >
               Apply for Partnership
             </Button>
-            <Button size="lg" variant="outline" className="bg-transparent border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
+            {/* <Button size="lg" variant="outline" className="bg-transparent border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
               Schedule a Call
-            </Button>
+            </Button> */}
           </div>
         </div>
+          {/* Form Dialog */}
+        <JoinFormDialog open={openForm} onOpenChange={setOpenForm} />
       </section>
     </div>
   );

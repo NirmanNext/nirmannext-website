@@ -98,14 +98,14 @@ const Quality = () => {
               Every product we deliver meets the highest industry standards. From sourcing to delivery, 
               quality is embedded in every step of our process.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            {/* <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" className="bg-primary hover:bg-primary/90">
                 View Quality Certificates
               </Button>
               <Button size="lg" variant="outline">
                 Download Quality Policy
               </Button>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>
