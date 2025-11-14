@@ -107,6 +107,15 @@ export function JoinFormDialog({ open, onOpenChange }: JoinFormDialogProps) {
         return
       }
 
+      // Check if Firestore is available
+      if (!db) {
+        setErrors({ 
+          firestore: "Database is not configured. Please check your environment variables." 
+        })
+        setLoading(false)
+        return
+      }
+
       // Save data to Firestore
       await addDoc(collection(db, "joinRequests"), {
         ...data,

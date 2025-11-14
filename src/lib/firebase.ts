@@ -1,7 +1,7 @@
 // src/lib/firebase.ts
-import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
-import { getAnalytics } from "firebase/analytics";
+import { initializeApp, FirebaseApp } from "firebase/app";
+import { getFirestore, Firestore } from "firebase/firestore";
+import { getAnalytics, Analytics } from "firebase/analytics";
 
 // Firebase config from .env.local (Vite prefixes env vars with VITE_)
 const firebaseConfig = {
@@ -14,17 +14,42 @@ const firebaseConfig = {
   measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID as string,
 };
 
-console.log("Firebase Config:", firebaseConfig);
+// Check if Firebase config is valid
+const isFirebaseConfigValid = () => {
+  return !!(
+    firebaseConfig.apiKey &&
+    firebaseConfig.authDomain &&
+    firebaseConfig.projectId &&
+    firebaseConfig.appId
+  );
+};
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+let app: FirebaseApp | null = null;
+let db: Firestore | null = null;
+let analytics: Analytics | null = null;
 
-// Export Firestore
-export const db = getFirestore(app);
+// Initialize Firebase only if config is valid
+if (isFirebaseConfigValid()) {
+  try {
+    app = initializeApp(firebaseConfig);
+    db = getFirestore(app);
+    
+    // Initialize Analytics only in browser environment
+    if (typeof window !== "undefined") {
+      try {
+        analytics = getAnalytics(app);
+      } catch (error) {
+        console.warn("Firebase Analytics initialization failed:", error);
+      }
+    }
+  } catch (error) {
+    console.error("Firebase initialization failed:", error);
+  }
+} else {
+  console.warn("⚠️ Firebase configuration is missing. Some features may not work.");
+}
 
-// Export Analytics (only works in browser, not server-side)
-export const analytics = getAnalytics(app);
-
+// Export with fallbacks
 export { app };
-
-console.log("Firebase Config:", firebaseConfig);
+export { db };
+export { analytics };
