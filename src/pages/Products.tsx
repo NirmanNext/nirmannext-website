@@ -1,109 +1,241 @@
+// src/pages/Products.tsx
+import React, { useMemo, useState } from "react";
 import Navigation from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Search, Filter, Package, Truck, Shield, Star } from "lucide-react";
+import { Search, Package, Truck, Shield } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 
-const Products = () => {
-  const productCategories = [
-    {
-      name: "Cement & Concrete",
-      image: "/src/assets/cement-category.jpg",
-      products: 45,
-      description: "Premium quality cement, concrete mix, and additives",
-      featured: ["OPC 53 Grade", "PPC Cement", "Ready Mix Concrete"]
-    },
-    {
-      name: "Adhesives & Sealants",
-      image: "/src/assets/adhesives-category.jpg", 
-      products: 32,
-      description: "Tile adhesives, wall putty, and waterproofing solutions",
-      featured: ["PlasterKing Pro", "RockGrip Adhesive", "Waterproof Sealant"]
-    },
-    {
-      name: "Construction Tools",
-      image: "/src/assets/hero-construction.jpg",
-      products: 28,
-      description: "Professional tools for construction and finishing work",
-      featured: ["Power Tools", "Hand Tools", "Safety Equipment"]
-    },
-    {
-      name: "Building Materials", 
-      image: "/src/assets/cement-category.jpg",
-      products: 67,
-      description: "Bricks, blocks, sand, aggregates, and steel",
-      featured: ["Red Bricks", "AAC Blocks", "River Sand"]
-    },
-    {
-      name: "Finishing Materials",
-      image: "/src/assets/adhesives-category.jpg",
-      products: 89,
-      description: "Tiles, paints, plasters, and decorative materials",
-      featured: ["Ceramic Tiles", "Wall Paints", "Decorative Plaster"]
-    },
-    {
-      name: "Plumbing & Electrical",
-      image: "/src/assets/hero-construction.jpg", 
-      products: 124,
-      description: "Pipes, fittings, wires, and electrical accessories",
-      featured: ["PVC Pipes", "Copper Wires", "Junction Boxes"]
-    }
-  ];
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
-  const privateLabelBrands = [
-    {
-      name: "PlasterKing",
-      tagline: "Premium Wall Care Solutions",
-      products: ["Wall Putty", "Primer", "Texture Finish"],
-      savings: "Save up to 30%",
-      quality: "ISO 9001:2015 Certified"
-    },
-    {
-      name: "RockGrip", 
-      tagline: "Superior Adhesive Technology",
-      products: ["Tile Adhesive", "Stone Fix", "Waterproof Bond"],
-      savings: "Save up to 25%", 
-      quality: "Lab Tested Quality"
-    }
-  ];
+// import products JSON (assumes src/data/products.json exists)
+import productsDataRaw from "@/data/products.json";
+
+type Product = {
+  id: string;
+  name: string;
+  brand: string;
+  category: string;
+  packaging?: string;
+  short_description?: string;
+  applicationArea?: string;
+  description?: string;
+  certification?: string;
+  image?: string; // path as stored in JSON, e.g. "/src/assets/products/TA01.png"
+  available?: boolean;
+  tags?: string[];
+};
+
+const productsData: Product[] = (productsDataRaw as unknown) as Product[];
+
+/**
+ * Glob-import product asset files from src/assets/products/
+ * - eager: true -> returns URLs at build time
+ * - as: "url" -> returns string URLs (instead of module)
+ *
+ * Note: Type assertion to Record<string,string> helps TS. Vite provides import.meta.glob.
+ */
+const importedProductImages = import.meta.glob<
+  string
+>("/src/assets/products/*.{png,jpg,jpeg,webp,svg}", { eager: true, as: "url" }) as Record<
+  string,
+  string
+>;
+
+/**
+ * Utility: resolve an image path from JSON to the actual URL returned by import.meta.glob.
+ * - Accepts paths like "/src/assets/products/TA01.png" (what you're using in JSON)
+ * - Also attempts basenames if JSON contains only filename or relative path.
+ */
+function resolveImageUrl(imagePath?: string): string | undefined {
+  if (!imagePath) return undefined;
+
+  // direct hit (JSON path matches glob key)
+  if (importedProductImages[imagePath]) {
+    return importedProductImages[imagePath];
+  }
+
+  // normalize: strip leading "./" or "/" if present
+  const normalized = imagePath.replace(/^\.\//, "").replace(/^\//, "");
+
+  // Try matching using full 'src/assets/products/...' key produced by glob
+  const altKey = `/src/${normalized}`;
+  if (importedProductImages[altKey]) return importedProductImages[altKey];
+
+  // Try matching by basename only (TA01.png)
+  const base = normalized.split("/").pop();
+  if (base) {
+    // find a glob entry that endsWith the basename
+    const foundEntry = Object.entries(importedProductImages).find(([k]) =>
+      k.endsWith(`/products/${base}`)
+    );
+    if (foundEntry) return foundEntry[1];
+  }
+
+  // not found
+  return undefined;
+}
+
+// derive unique filter lists
+const uniqueBrands = Array.from(new Set(productsData.map((p) => p.brand))).filter(Boolean);
+const uniqueCategories = Array.from(new Set(productsData.map((p) => p.category))).filter(Boolean);
+const uniqueAppAreas = Array.from(
+  new Set(productsData.map((p) => p.applicationArea).filter(Boolean))
+).filter(Boolean);
+
+export default function Products() {
+  const [query, setQuery] = useState("");
+  const [debouncedQuery, setDebouncedQuery] = useState("");
+  const [brandFilter, setBrandFilter] = useState<string | null>(null);
+  const [categoryFilter, setCategoryFilter] = useState<string | null>(null);
+  const [appAreaFilter, setAppAreaFilter] = useState<string | null>(null);
+  const [availabilityFilter, setAvailabilityFilter] = useState<string>("any"); // 'any'|'in'|'out'
+
+  // debounce search input (300ms)
+  React.useEffect(() => {
+    const t = setTimeout(() => setDebouncedQuery(query.trim()), 300);
+    return () => clearTimeout(t);
+  }, [query]);
+
+  const filtered = useMemo(() => {
+    const q = debouncedQuery.toLowerCase();
+    return productsData.filter((p) => {
+      // availability filter
+      if (availabilityFilter === "in" && !p.available) return false;
+      if (availabilityFilter === "out" && p.available) return false;
+
+      // brand filter
+      if (brandFilter && p.brand !== brandFilter) return false;
+
+      // category filter
+      if (categoryFilter && p.category !== categoryFilter) return false;
+
+      // application area filter
+      if (appAreaFilter && p.applicationArea !== appAreaFilter) return false;
+
+      // search (name, brand, short_description, applicationArea, certification, description, tags)
+      if (!q) return true;
+      const hay = `${p.name} ${p.brand} ${p.category} ${p.short_description || ""} ${
+        p.applicationArea || ""
+      } ${p.certification || ""} ${p.description || ""} ${p.tags?.join(" ") || ""}`.toLowerCase();
+      return hay.includes(q);
+    });
+  }, [debouncedQuery, brandFilter, categoryFilter, appAreaFilter, availabilityFilter]);
+
+  // UI helpers
+  const clearAllFilters = () => {
+    setQuery("");
+    setBrandFilter(null);
+    setCategoryFilter(null);
+    setAppAreaFilter(null);
+    setAvailabilityFilter("any");
+  };
 
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
-      
-      {/* Hero Section */}
-      <section className="bg-gradient-subtle py-16 border-b">
+
+      {/* Hero */}
+      <section className="bg-gradient-subtle py-12 border-b">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
               Premium Construction Materials
             </h1>
-            <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Discover our comprehensive range of quality-assured materials for every construction need. 
-              From cement to finishing touches, we've got you covered.
+            <p className="text-lg text-muted-foreground mb-6 max-w-2xl mx-auto">
+              One-stop catalog for RockGrip adhesives and PlasterKing wall-care products.
             </p>
-            
-            {/* Search and Filters */}
-            <div className="flex flex-col md:flex-row gap-4 max-w-2xl mx-auto">
-              <div className="relative flex-1">
+
+            {/* Search & Filters */}
+            <div className="flex flex-col md:flex-row gap-4 items-center justify-center max-w-3xl mx-auto">
+              <div className="relative flex-1 w-full">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
-                <Input 
-                  placeholder="Search products, brands, or categories..." 
+                <Input
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  placeholder="Search products, brands, certifications or application area..."
                   className="pl-10"
+                  aria-label="Search products"
                 />
               </div>
-              <Select>
-                <SelectTrigger className="w-full md:w-48">
-                  <Filter className="h-4 w-4 mr-2" />
-                  <SelectValue placeholder="Filter by" />
+
+              {/* Brand select */}
+              <Select
+                value={brandFilter ?? "all"}
+                onValueChange={(v) => setBrandFilter(v === "all" ? null : v)}
+              >
+                <SelectTrigger className="w-full md:w-44">
+                  <SelectValue placeholder="Brand" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="category">Category</SelectItem>
-                  <SelectItem value="brand">Brand</SelectItem>
-                  <SelectItem value="price">Price Range</SelectItem>
-                  <SelectItem value="availability">Availability</SelectItem>
+                  <SelectItem value="all">All Brands</SelectItem>
+                  {uniqueBrands.map((b) => (
+                    // ensure no empty string value
+                    <SelectItem key={b} value={b || `brand-${b}`}>
+                      {b}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+
+              {/* Category select */}
+              <Select
+                value={categoryFilter ?? "all"}
+                onValueChange={(v) => setCategoryFilter(v === "all" ? null : v)}
+              >
+                <SelectTrigger className="w-full md:w-44">
+                  <Package className="h-4 w-4 mr-2" />
+                  <SelectValue placeholder="Category" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Categories</SelectItem>
+                  {uniqueCategories.map((c) => (
+                    <SelectItem key={c} value={c || `cat-${c}`}>
+                      {c}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+
+              {/* Application Area select */}
+              <Select
+                value={appAreaFilter ?? "all"}
+                onValueChange={(v) => setAppAreaFilter(v === "all" ? null : v)}
+              >
+                <SelectTrigger className="w-full md:w-40">
+                  <SelectValue placeholder="Application Area" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Areas</SelectItem>
+                  {uniqueAppAreas.map((a) => (
+                    <SelectItem key={a} value={a || `area-${a}`}>
+                      {a}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+
+              {/* Availability */}
+              <Select
+                value={availabilityFilter}
+                onValueChange={(v) => setAvailabilityFilter(v || "any")}
+              >
+                <SelectTrigger className="w-full md:w-40">
+                  <Truck className="h-4 w-4 mr-2" />
+                  <SelectValue placeholder="Availability" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="any">Any</SelectItem>
+                  <SelectItem value="in">In Stock</SelectItem>
+                  <SelectItem value="out">Out of Stock</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -111,139 +243,142 @@ const Products = () => {
         </div>
       </section>
 
-      {/* Private Label Brands */}
-      <section className="py-16 bg-accent/30">
+      {/* Grid */}
+      <section className="py-12">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-foreground mb-4">Our Private Label Brands</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Exclusive brands offering superior quality at competitive prices
-            </p>
+          <div className="flex items-center justify-between mb-6">
+            <div>
+              <h2 className="text-2xl font-semibold">Products</h2>
+              <p className="text-sm text-muted-foreground">
+                Showing {filtered.length} of {productsData.length} products
+              </p>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <Button
+                variant="ghost"
+                onClick={clearAllFilters}
+              >
+                Clear filters
+              </Button>
+              <Badge className="bg-primary/10 text-primary-foreground">
+                RockGrip & PlasterKing
+              </Badge>
+            </div>
           </div>
-          
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {privateLabelBrands.map((brand) => (
-              <Card key={brand.name} className="overflow-hidden border-2 hover:shadow-elegant transition-shadow">
-                <CardHeader className="bg-gradient-primary text-primary-foreground">
-                  <CardTitle className="text-2xl">{brand.name}</CardTitle>
-                  <CardDescription className="text-primary-foreground/80">
-                    {brand.tagline}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="p-6">
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-2">
-                      <Shield className="h-5 w-5 text-primary" />
-                      <span className="font-medium">{brand.quality}</span>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filtered.map((p) => {
+              // attempt to resolve image URL for this product
+              const imageUrl = resolveImageUrl(p.image);
+
+              return (
+                <Card key={p.id} className="hover:shadow-elegant transition-all">
+                  <div className="aspect-video bg-gray-50 flex items-center justify-center overflow-hidden">
+                    {imageUrl ? (
+                      <img
+                        src={imageUrl}
+                        alt={p.name}
+                        className="h-36 object-contain"
+                        loading="lazy"
+                        // on error, hide the image to allow icon fallback
+                        onError={(e) => {
+                          // hide broken image and clear src so browser doesn't repeatedly try
+                          const el = e.currentTarget as HTMLImageElement;
+                          el.style.display = "none";
+                          el.src = "";
+                        }}
+                      />
+                    ) : (
+                      // fallback icon if no image available or resolution failed
+                      <Shield className="h-12 w-12 text-muted-foreground/40" aria-hidden />
+                    )}
+                  </div>
+
+                  <CardContent>
+                    <div className="flex items-start justify-between">
+                      <div>
+                        <CardTitle className="text-lg">{p.name}</CardTitle>
+                        <div className="text-sm text-muted-foreground">
+                          {p.brand} • {p.packaging}
+                        </div>
+
+                        {p.short_description && (
+                          <div className="mt-2 text-sm text-gray-700">{p.short_description}</div>
+                        )}
+
+                        {p.applicationArea && (
+                          <div className="mt-2 text-sm text-muted-foreground">
+                            <strong>Application:</strong> {p.applicationArea}
+                          </div>
+                        )}
+
+                        {p.certification && (
+                          <div className="mt-2 text-xs text-muted-foreground">
+                            <strong>Certification:</strong> {p.certification}
+                          </div>
+                        )}
+                      </div>
+
+                      <div className="text-right">
+                        <div className="text-xs text-muted-foreground">
+                          {p.available ? "In stock" : "Out of stock"}
+                        </div>
+                      </div>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <Badge variant="secondary" className="bg-green-100 text-green-800">
-                        {brand.savings}
-                      </Badge>
-                    </div>
-                    <div>
-                      <p className="font-medium mb-2">Featured Products:</p>
-                      <div className="flex flex-wrap gap-1">
-                        {brand.products.map((product) => (
-                          <Badge key={product} variant="outline">
-                            {product}
+
+                    <div className="mt-4 flex items-center justify-between">
+                      <div className="flex flex-wrap gap-2">
+                        {p.tags?.slice(0, 3).map((t) => (
+                          <Badge key={t} variant="secondary" className="text-xs">
+                            {t}
                           </Badge>
                         ))}
                       </div>
+                      <div className="flex items-center gap-3">
+                        <Button size="sm" variant="ghost" onClick={() => {
+                          // simple stub — wire this to RFQ flow
+                          window.alert(`Request RFQ for ${p.name}`);
+                        }}>
+                          Request RFQ
+                        </Button>
+                        <Button size="sm" onClick={() => {
+                          const phone = "919819992488"; // WhatsApp requires country code without +
+                          // open WA link fallback (simple)
+                          const msg = encodeURIComponent(`Hi, I want to ask about ${p.name} (${p.id})`);
+                          const waUrl = `https://wa.me/${phone}?text=${msg}`;
+                          // open whatsapp web (user may not have WA installed)
+                          window.open(waUrl, "_blank");
+                        }}>
+                          WhatsApp
+                        </Button>
+                      </div>
                     </div>
-                    <Button className="w-full mt-4">
-                      View {brand.name} Products
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+                  </CardContent>
+                </Card>
+              );
+            })}
+
+            {filtered.length === 0 && (
+              <div className="col-span-full p-8 text-center text-muted-foreground">
+                No products match your search. Try clearing filters or search terms.
+              </div>
+            )}
           </div>
         </div>
       </section>
 
-      {/* Product Categories */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-foreground mb-4">Product Categories</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Browse our extensive catalog organized by construction phases and material types
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {productCategories.map((category) => (
-              <Card key={category.name} className="group hover:shadow-elegant transition-all duration-300 overflow-hidden">
-                <div className="aspect-video bg-gradient-subtle relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-10" />
-                  <div className="absolute top-4 right-4 z-20">
-                    <Badge className="bg-primary/90 text-primary-foreground">
-                      {category.products} Products
-                    </Badge>
-                  </div>
-                  <div className="absolute bottom-4 left-4 z-20">
-                    <h3 className="text-xl font-bold text-white mb-1">{category.name}</h3>
-                  </div>
-                  <Package className="absolute inset-0 m-auto h-16 w-16 text-muted-foreground/30" />
-                </div>
-                
-                <CardContent className="p-6">
-                  <p className="text-muted-foreground mb-4">{category.description}</p>
-                  
-                  <div className="space-y-3">
-                    <div>
-                      <p className="font-medium text-sm mb-2">Featured Items:</p>
-                      <div className="flex flex-wrap gap-1">
-                        {category.featured.map((item) => (
-                          <Badge key={item} variant="secondary" className="text-xs">
-                            {item}
-                          </Badge>
-                        ))}
-                      </div>
-                    </div>
-                    
-                    <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                      <div className="flex items-center gap-1">
-                        <Truck className="h-4 w-4" />
-                        <span>Free Delivery</span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                        <span>4.8+ Rating</span>
-                      </div>
-                    </div>
-                    
-                    <Button variant="outline" className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                      Browse {category.name}
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-16 bg-primary text-primary-foreground">
+      {/* CTA */}
+      <section className="py-12 bg-primary text-primary-foreground">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-4">Ready to Start Your Project?</h2>
-          <p className="text-xl mb-8 opacity-90">
-            Get bulk pricing, expert guidance, and reliable delivery for your construction needs
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" variant="secondary">
-              Request Bulk Quote
-            </Button>
-            <Button size="lg" variant="outline" className="bg-transparent border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
-              Speak to Expert
-            </Button>
-          </div>
+          <h3 className="text-2xl font-semibold">Need a sample pack?</h3>
+          <p className="text-sm opacity-90 mb-4">Request a sample to test product performance on-site.</p>
+          <Button size="lg" variant="secondary">
+            Request Sample
+          </Button>
         </div>
       </section>
+      {/* <FloatingWhatsApp /> */}
     </div>
   );
-};
-
-export default Products;
+}

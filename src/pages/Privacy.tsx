@@ -19,7 +19,7 @@ const Privacy = () => {
           <section className="mb-8">
             <h2 className="text-2xl font-semibold mb-4 text-foreground">1. Introduction</h2>
             <p className="text-muted-foreground mb-4">
-              This Privacy Policy explains how <strong>VinirmanTech Private Limited</strong> ("NirmanNext", "we", "our", "us") collects, uses, discloses, stores and protects your personal data when you access or use the NirmanNext platform located at <a href="https://nirmannext-website.vercel.app/" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">https://nirmannext-website.vercel.app/</a> ("Platform").
+              This Privacy Policy explains how <strong>VinirmanTech Private Limited</strong> ("NirmanNext", "we", "our", "us") collects, uses, discloses, stores and protects your personal data when you access or use the NirmanNext platform located at <a href="https://www.nirmannext.com/" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">https://www.nirmannext.com/</a> ("Platform").
             </p>
             <p className="text-muted-foreground mb-4">
               We are committed to protecting your personal data in line with applicable Indian laws, including the <strong>Digital Personal Data Protection Act, 2023 (DPDPA)</strong>.

@@ -1,0 +1,83 @@
+[
+  {
+    "id": "RG-TA01",
+    "name": "RockGrip TA01 Tile Adhesive",
+    "brand": "RockGrip",
+    "category": "Tile Adhesive",
+    "packaging": "20 kg",
+    "short_description": "Polymer modified adhesive for small format tiles (TA01).",
+    "applicationArea":"Floor",
+    "description": "Polymer-modified cementitious tile adhesive suitable for ceramic & vitrified tiles, offering excellent open time, good workability and strong bond for interior and exterior floors.",
+    "certification": "IS 15477:2019 Type 1",
+    "image": "/src/assets/products/TA01.png",
+    "available": true,
+    "tags": ["C1", "tile", "adhesive"]
+  },
+  {
+    "id": "RG-TA02",
+    "name": "RockGrip TA02 Tile Adhesive",
+    "brand": "RockGrip",
+    "category": "Tile Adhesive",
+    "packaging": "20 kg",
+    "short_description": "High-strength polymer adhesive for medium & large-format tiles (TA02).",
+    "applicationArea":"Wall upto 15 Feet",
+    "description": "High-performance polymer-modified adhesive formulated for large-format tiles, porcelain and stone. Improved flexural strength and bond medium and large format tiles.",
+    "certification": "IS 15477:2019 Type 2",
+    "image": "/src/assets/products/TA02.png",
+    "available": true,
+    "tags": ["C2", "large-format"]
+  },
+  {
+    "id": "RG-TA03",
+    "name": "RockGrip TA03 Tile Adhesive",
+    "brand": "RockGrip",
+    "category": "Tile Adhesive",
+    "packaging": "20 kg",
+    "short_description": "High-strength polymer adhesive for large-format tiles and stones (TA03).",
+    "applicationArea":"Wall 15 Feet and higher",
+    "description": "High-performance polymer-modified adhesive formulated for large-format tiles, porcelain and stone. Improved flexural strength and bond for wet areas.",
+    "certification": "IS 15477:2019 Type 3",
+    "image": "/src/assets/products/TA03.png",
+    "available": true,
+    "tags": ["C2", "large-format"]
+  },
+  {
+    "id": "RG-BA01",
+    "name": "RockGrip Block Adhesive",
+    "brand": "RockGrip",
+    "category": "Block Adhesive",
+    "packaging": "40 kg",
+    "short_description": "Masonry & block adhesive engineered for high-bond masonry works.",
+    "description": "Ready-to-use adhesive for bonding masonry blocks, AAC blocks and for repair works. High adhesion and reduced shrinkage for consistent joint quality.",
+    "certification": "Internal QA",
+    "image": "/src/assets/products/BJM1.png",
+    "available": true,
+    "tags": ["block", "masonry"]
+  },
+  {
+    "id": "PK-RMP",
+    "name": "PlasterKing Ready Mix Plaster (RMP)",
+    "brand": "PlasterKing",
+    "category": "Plaster Sand / RMP",
+    "packaging": "40 kg",
+    "short_description": "0% silt ready mix plaster sand for premium plaster finishes.",
+    "description": "Washed, dried and pre-screened ready mix plaster sand engineered for consistent plaster mixes. Eliminates on-site screening and improves finish quality. Ideal for internal/external plastering.",
+    "certification": "Internal QA",
+    "image": "/src/assets/products/RMP1.png",
+    "available": true,
+    "tags": ["plaster", "rmp"]
+  },
+  {
+    "id": "PK-PSAND",
+    "name": "PlasterKing P-Sand",
+    "brand": "PlasterKing",
+    "category": "Plaster Sand / RMP",
+    "packaging": "35 kg",
+    "short_description": "Packaged P-Sand for consistent plaster mixes and improved productivity.",
+    "description": "Premium packed P-Sand with controlled grading and moisture — reduces rework and delivers consistent plastering results. Suitable for mortars and finishing coats.",
+    "certification": "Silt: <1%; Fineness Modulus in specified range",
+    "image": "/src/assets/products/PSND.png",
+    "available": true,
+    "tags": ["psand", "0% silt"]
+  }
+]

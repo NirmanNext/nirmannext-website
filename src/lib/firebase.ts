@@ -3,6 +3,12 @@ import { initializeApp, FirebaseApp } from "firebase/app";
 import { getFirestore, Firestore } from "firebase/firestore";
 import { getAnalytics, Analytics } from "firebase/analytics";
 
+// Check if we're in development mode
+const isDevelopment = import.meta.env.DEV || import.meta.env.MODE === 'development';
+
+// Check if Firestore should be disabled in dev (can be overridden with env var)
+const disableFirestoreInDev = import.meta.env.VITE_DISABLE_FIRESTORE_IN_DEV !== 'false';
+
 // Firebase config from .env.local (Vite prefixes env vars with VITE_)
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY as string,
@@ -28,8 +34,10 @@ let app: FirebaseApp | null = null;
 let db: Firestore | null = null;
 let analytics: Analytics | null = null;
 
-// Initialize Firebase only if config is valid
-if (isFirebaseConfigValid()) {
+// Initialize Firebase only if config is valid and not disabled in dev
+const shouldInitializeFirestore = isFirebaseConfigValid() && !(isDevelopment && disableFirestoreInDev);
+
+if (shouldInitializeFirestore) {
   try {
     app = initializeApp(firebaseConfig);
     db = getFirestore(app);
@@ -46,7 +54,11 @@ if (isFirebaseConfigValid()) {
     console.error("Firebase initialization failed:", error);
   }
 } else {
-  console.warn("⚠️ Firebase configuration is missing. Some features may not work.");
+  if (isDevelopment && disableFirestoreInDev) {
+    console.log("🔧 Firestore is disabled in development mode. Set VITE_DISABLE_FIRESTORE_IN_DEV=false to enable.");
+  } else {
+    console.warn("⚠️ Firebase configuration is missing. Some features may not work.");
+  }
 }
 
 // Export with fallbacks
