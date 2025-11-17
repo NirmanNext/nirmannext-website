@@ -47,7 +47,7 @@
         linkedin:"https://www.linkedin.com/in/mohammadalicse/",
         role: "Founder & CEO",
         experience: "8+ years in product engineering and launches",
-        background: "Former Software Engineer at a US based Fintech Firm",
+        background: "Ex-Software Engineer",
         focus: "Strategic vision and industry partnerships"
       },
       {
@@ -55,23 +55,16 @@
         linkedin:"https://www.linkedin.com/in/amitvermacse/",
         role: "Co-Founder & CTO",
         experience: "8+ years in Software Engineering",
-        background: "IIT-M, Ex-Enphase Energy",
+        background: "Ex-Software Engineer, IIT-M",
         focus: "Technology platform and digital innovation"
       },
       {
         name: "Udit Mishra",
         role: "Co-Founder & COO",
         experience: "5+ years in construction chemicals trading",
-        background: "Former Civil Contractor & Trader",
+        background: "Ex-Civil Contractor & Trader",
         focus: "Operations and supply chain management"
       }
-      // {
-      //   name: "Sunita Reddy",
-      //   role: "Head of Quality",
-      //   experience: "18+ years in quality assurance",
-      //   background: "Former quality head at ISO certification body",
-      //   focus: "Quality standards and certification processes"
-      // }
     ];
 
     return (
@@ -174,7 +167,7 @@
         </section>
 
         {/* Company Journey */}
-        <section className="py-16">
+        {/* <section className="py-16">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold text-foreground mb-4">Our Journey</h2>
@@ -203,10 +196,10 @@
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* Leadership Team */}
-        <section className="py-16 bg-accent/30">
+        {/* <section className="py-16 bg-accent/30">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold text-foreground mb-4">Leadership Team</h2>
@@ -242,7 +235,7 @@
               ))}
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* Company Stats */}
         <section className="py-16">
@@ -258,7 +251,7 @@
               {[
                 { number: "50+", label: "Projects Completed", description: "Construction projects powered by our materials" },
                 { number: "100+", label: "Partner Network", description: "Professionals, retailers, and suppliers" },
-                { number: "10+", label: "Cities Covered", description: "Pan-State presence and growing" },
+                { number: "20+", label: "Cities Covered", description: "Pan-State presence and growing" },
                 { number: "95%+", label: "Customer Satisfaction", description: "Based on verified customer reviews" }
               ].map((stat) => (
                 <Card key={stat.label} className="text-center">

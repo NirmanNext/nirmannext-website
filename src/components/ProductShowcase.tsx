@@ -54,72 +54,72 @@ const ProductShowcase = () => {
     }
   ];
 
-  return (
-    <section className="py-20 bg-background">
-      <div className="container mx-auto px-4">
+  // return (
+    // <section className="py-20 bg-background">
+      {/* <div className="container mx-auto px-4"> */}
         
         {/* Product Categories */}
-        <div className="mb-20">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
-              Complete Construction Material Range
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              From foundation to finishing, find everything you need with guaranteed quality, 
-              competitive pricing, and reliable delivery.
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-            {categories.map((category, index) => (
-              <Card key={index} className="group hover:shadow-elevated transition-all duration-300 transform hover:-translate-y-2 cursor-pointer border-0 shadow-card-custom overflow-hidden">
-                <div className="aspect-video bg-muted relative overflow-hidden">
-                  {category.image ? (
-                    <img 
-                      src={category.image} 
-                      alt={category.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                  ) : (
-                    <div className="w-full h-full bg-gradient-construction flex items-center justify-center">
-                      <span className="text-4xl font-bold text-steel">
-                        {category.name.split(' ')[0][0]}
-                      </span>
-                    </div>
-                  )}
-                  <Badge className="absolute top-3 right-3 bg-construction-orange text-white border-0">
-                    {category.badge}
-                  </Badge>
-                </div>
-                <CardContent className="p-6">
-                  <h3 className="font-bold text-lg mb-2 text-foreground">
-                    {category.name}
-                  </h3>
-                  <p className="text-sm text-construction-orange font-medium mb-3">
-                    {category.products}
-                  </p>
-                  <p className="text-muted-foreground text-sm leading-relaxed mb-4">
-                    {category.description}
-                  </p>
-                  <Button variant="ghost" size="sm" className="w-full group-hover:text-primary transition-colors duration-300">
-                    Explore Category
-                    <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-          
-          <div className="text-center">
-            <Button variant="construction" size="lg">
-              Browse All Categories
-              <ArrowRight className="ml-2" />
-            </Button>
-          </div>
-        </div>
+          {/* <div className="mb-20">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
+                Complete Construction Material Range
+              </h2>
+              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+                From foundation to finishing, find everything you need with guaranteed quality, 
+                competitive pricing, and reliable delivery.
+              </p>
+            </div>
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+              {categories.map((category, index) => (
+                <Card key={index} className="group hover:shadow-elevated transition-all duration-300 transform hover:-translate-y-2 cursor-pointer border-0 shadow-card-custom overflow-hidden">
+                  <div className="aspect-video bg-muted relative overflow-hidden">
+                    {category.image ? (
+                      <img 
+                        src={category.image} 
+                        alt={category.name}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gradient-construction flex items-center justify-center">
+                        <span className="text-4xl font-bold text-steel">
+                          {category.name.split(' ')[0][0]}
+                        </span>
+                      </div>
+                    )}
+                    <Badge className="absolute top-3 right-3 bg-construction-orange text-white border-0">
+                      {category.badge}
+                    </Badge>
+                  </div>
+                  <CardContent className="p-6">
+                    <h3 className="font-bold text-lg mb-2 text-foreground">
+                      {category.name}
+                    </h3>
+                    <p className="text-sm text-construction-orange font-medium mb-3">
+                      {category.products}
+                    </p>
+                    <p className="text-muted-foreground text-sm leading-relaxed mb-4">
+                      {category.description}
+                    </p>
+                    <Button variant="ghost" size="sm" className="w-full group-hover:text-primary transition-colors duration-300">
+                      Explore Category
+                      <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                    </Button>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+            
+            <div className="text-center">
+              <Button variant="construction" size="lg">
+                Browse All Categories
+                <ArrowRight className="ml-2" />
+              </Button>
+            </div>
+          </div> */}
 
         {/* Private Label Spotlight */}
-        <div className="bg-gradient-construction rounded-2xl p-8 md:p-12">
+        {/* <div className="bg-gradient-construction rounded-2xl p-8 md:p-12">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
               Private Label Excellence
@@ -193,10 +193,10 @@ const ProductShowcase = () => {
               Explore Private Label Range
             </Button>
           </div>
-        </div>
-      </div>
-    </section>
-  );
+        </div> */}
+      {/* </div> */}
+    // </section>
+  // );
 };
 
 export default ProductShowcase;

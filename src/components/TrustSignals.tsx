@@ -34,19 +34,19 @@ const TrustSignals = () => {
   const stats = [
     {
       icon: Users,
-      number: "50+",
+      number: "100+",
       label: "Active Professionals",
       growth: "10x this year"
     },
     {
       icon: TrendingUp,
-      number: "100 Ton+",
+      number: "5000 Ton+",
       label: "Materials Delivered",
-      growth: "+35% MoM"
+      growth: "+25% MoM"
     },
     {
       icon: Award,
-      number: "10+",
+      number: "20+",
       label: "Cities Served",
       growth: "Expanding quarterly"
     }

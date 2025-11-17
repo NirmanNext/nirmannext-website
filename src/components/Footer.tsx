@@ -4,23 +4,21 @@ import { FacebookIcon, TwitterIcon, LinkedInIcon, InstagramIcon, LocationIcon, P
 
 const Footer: React.FC = () => {
   const socialLinks = [
-    { icon: <FacebookIcon />, href: '#', 'aria-label': 'Facebook' },
-    { icon: <TwitterIcon />, href: '#', 'aria-label': 'Twitter' },
-    { icon: <LinkedInIcon />, href: '#', 'aria-label': 'LinkedIn' },
-    { icon: <InstagramIcon />, href: '#', 'aria-label': 'Instagram' },
+    // { icon: <FacebookIcon />, href: '#', 'aria-label': 'Facebook' },
+    // { icon: <TwitterIcon />, href: '#', 'aria-label': 'Twitter' },
+    { icon: <LinkedInIcon />, href: 'https://in.linkedin.com/company/vinirmantech', 'aria-label': 'LinkedIn' },
+    { icon: <InstagramIcon />, href: 'https://www.instagram.com/nirmannext/', 'aria-label': 'Instagram' },
   ];
 
   const companyLinks = [
-    "About Us",
-    "Our Services",
-    "Our Portfolio",
-    "Testimonials",
-    "Contact Us"
+    { label: "About Us", href: "/about" },
+    { label: "Career", href: "/career" },
+    { label: "Contact Us", href: "/contact" }
   ];
 
   const supportLinks = [
-    { label: "FAQ", href: "#" },
-    { label: "Terms & Conditions", href: "#" },
+    { label: "FAQ", href: "/faqs" },
+    { label: "Terms & Conditions", href: "/terms" },
     { label: "Privacy Policy", href: "/privacy" }
   ];
 
@@ -49,10 +47,16 @@ const Footer: React.FC = () => {
             <ul className="space-y-3">
               {companyLinks.map((link, index) => (
                 <li key={index}>
-                  <a href="#" className="text-gray-400 hover:text-white transition-colors duration-300">
-                    {link}
+                {link.href.startsWith('/') ? (
+                  <Link to={link.href} className="text-gray-400 hover:text-white transition-colors duration-300">
+                    {link.label}
+                  </Link>
+                ) : (
+                  <a href={link.href} className="text-gray-400 hover:text-white transition-colors duration-300">
+                    {link.label}
                   </a>
-                </li>
+                )}
+              </li>
               ))}
             </ul>
           </div>

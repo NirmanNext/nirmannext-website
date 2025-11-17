@@ -103,7 +103,7 @@ const HowItWorks = () => {
         </div>
         
         {/* Bottom CTA */}
-        <div className="text-center mt-16">
+        {/* <div className="text-center mt-16">
           <h3 className="text-2xl font-bold mb-4 text-foreground">
             Ready to Transform Your Construction Process?
           </h3>
@@ -119,7 +119,7 @@ const HowItWorks = () => {
               Schedule a Demo →
             </button>
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );

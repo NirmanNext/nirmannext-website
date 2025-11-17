@@ -25,46 +25,27 @@ const Contact = () => {
       action: "Send Email",
       href: "mailto:support@nirmannext.com"
     }
-    // ,
-    // {
-    //   icon: MessageCircle,
-    //   title: "Live Chat",
-    //   primary: "Instant messaging support",
-    //   secondary: "Available 9 AM - 9 PM",
-    //   action: "Start Chat"
-    // },
-    // {
-    //   icon: MapPin,
-    //   title: "Office Visit",
-    //   primary: "Schedule an appointment",
-    //   secondary: "Lucknow office",
-    //   action: "Book Visit"
-    // }
   ];
 
   const offices = [
     {
-      city: "Lucknow (Head Office)",
+      city: "Lucknow",
+      officeType: "Headquarters",
       address: "2nd Floor, Cyber Heights, Vibhuti Khand, Gomti Nagar,Lucknow, 226010",
-      phone: "+91 981 999 2488",
+      phone: "+91-9819992488",
       email: "admin@nirmannext.com",
-      hours: "Mon-Fri: 9 AM - 7 PM"
+      hours: "Mon-Fri: 9 AM - 7 PM",
+      geoLocation: "https://www.google.com/maps?rlz=1C1CHBD_enIN1123IN1123&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIICAEQABgNGB4yCggCEAAYCBgNGB4yCggDEAAYgAQYogQyCggEEAAYgAQYogQyBggFEEUYPDIGCAYQRRg8MgYIBxBFGDzSAQg1MDM1ajBqNKgCALACAQ&um=1&ie=UTF-8&fb=1&gl=in&sa=X&geocode=KT2eU8gI45s5MQsIO-8cKqxj&daddr=2nd+Floor,+Cyber+Heights,+Vibhuti+Khand,+Gomti+Nagar,+Lucknow,+Uttar+Pradesh+226010"
+    },
+    {
+      city: "Orai",
+      officeType: "Manufacturing Plant",
+      address: "NirmanNext Factry, 858, Mohammdabad, Orai, Jalaun 285122",
+      phone: "+91- 8960981283",
+      email: "admin@nirmannext.com",
+      hours: "Mon-Sat: 8 AM - 6 PM",
+      geoLocation: "https://www.google.com/maps?rlz=1C1CHBD_enIN1123IN1123&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIJCAEQIRgKGKABMgkIAhAhGAoYoAEyCQgDECEYChigATIJCAQQIRgKGKABMgkIBRAhGAoYoAEyBggGECEYFTIHCAcQIRiPAjIHCAgQIRiPAjIHCAkQIRiPAtIBCDU0NzVqMGo0qAIAsAIB&um=1&ie=UTF-8&fb=1&gl=in&sa=X&geocode=KVVrFF4AfZ05MVeZE4wJ2pdX&daddr=khasara+858,+Nirman+Next,+Mohammdabad,+Uttar+Pradesh+285122"
     }
-    // ,
-    // {
-    //   city: "Delhi",
-    //   address: "Sector 18, Cyber Hub, Gurugram, Haryana - 122015",
-    //   phone: "+91 11 4567 8900",
-    //   email: "delhi@nirmannext.com",
-    //   hours: "Mon-Sat: 9 AM - 7 PM"
-    // },
-    // {
-    //   city: "Bangalore",
-    //   address: "Electronic City Phase 1, Bangalore, Karnataka - 560100",
-    //   phone: "+91 80 4567 8900",
-    //   email: "bangalore@nirmannext.com",
-    //   hours: "Mon-Sat: 9 AM - 7 PM"
-    // }
   ];
 
   const departments = [
@@ -151,145 +132,17 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Contact Form */}
-      {/* commenting out this entire section- not need currently 
-      <section className="py-16 bg-accent/30">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-foreground mb-4">Send Us a Message</h2>
-              <p className="text-muted-foreground">
-                Fill out the form below and we'll get back to you within 4 hours
-              </p>
-            </div>
-            
-            <Card className="overflow-hidden">
-              <CardContent className="p-8">
-                <div className="grid md:grid-cols-2 gap-8">*/}
-                  {/* Contact Form */}
-                  {/* commenting out this entire section- not need currently
-                  <div>
-                    <form className="space-y-6">
-                      <div className="grid md:grid-cols-2 gap-4">
-                        <div>
-                          <label className="block text-sm font-medium mb-2">Full Name *</label>
-                          <Input placeholder="Enter your full name" />
-                        </div>
-                        <div>
-                          <label className="block text-sm font-medium mb-2">Phone Number *</label>
-                          <Input placeholder="+91 9876543210" />
-                        </div>
-                      </div>
-                      
-                      <div>
-                        <label className="block text-sm font-medium mb-2">Email Address *</label>
-                        <Input type="email" placeholder="your.email@example.com" />
-                      </div>
-                      
-                      <div>
-                        <label className="block text-sm font-medium mb-2">I am a *</label>
-                        <Select>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select your category" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="contractor">Contractor/Builder</SelectItem>
-                            <SelectItem value="architect">Architect/Engineer</SelectItem>
-                            <SelectItem value="retailer">Retailer/Dealer</SelectItem>
-                            <SelectItem value="homeowner">Homeowner/Individual</SelectItem>
-                            <SelectItem value="other">Other</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                      
-                      <div>
-                        <label className="block text-sm font-medium mb-2">Department</label>
-                        <Select>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select department" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="sales">Sales & Orders</SelectItem>
-                            <SelectItem value="partnership">Partnership</SelectItem>
-                            <SelectItem value="quality">Quality & Delivery</SelectItem>
-                            <SelectItem value="support">General Support</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                      
-                      <div>
-                        <label className="block text-sm font-medium mb-2">Subject *</label>
-                        <Input placeholder="Brief subject of your inquiry" />
-                      </div>
-                      
-                      <div>
-                        <label className="block text-sm font-medium mb-2">Message *</label>
-                        <Textarea 
-                          placeholder="Please provide details about your inquiry, project requirements, or questions..."
-                          rows={4}
-                        />
-                      </div>
-                      
-                      <Button size="lg" className="w-full">
-                        Send Message
-                      </Button>
-                    </form>
-                  </div>*/}
-                  
-                  {/* Quick Support */}
-                  {/* commenting out this entire section- not need currently
-                  <div>
-                    <h3 className="text-xl font-bold mb-6">Quick Support by Department</h3>
-                    <div className="space-y-4">
-                      {departments.map((dept) => {
-                        const IconComponent = dept.icon;
-                        return (
-                          <Card key={dept.name} className="p-4 hover:bg-accent/50 transition-colors">
-                            <div className="flex items-start gap-3">
-                              <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
-                                <IconComponent className="h-5 w-5 text-primary" />
-                              </div>
-                              <div>
-                                <h4 className="font-semibold text-sm">{dept.name}</h4>
-                                <p className="text-xs text-muted-foreground">{dept.description}</p>
-                              </div>
-                            </div>
-                          </Card>
-                        );
-                      })}
-                    </div>
-                    
-                    <div className="mt-8 p-4 bg-green-50 border border-green-200 rounded-lg">
-                      <div className="flex items-center gap-2 mb-2">
-                        <Clock className="h-5 w-5 text-green-600" />
-                        <span className="font-semibold text-green-800">Response Time</span>
-                      </div>
-                      <ul className="text-sm text-green-700 space-y-1">
-                        <li>• Email: Within 4 hours</li>
-                        <li>• Phone: Immediate</li>
-                        <li>• Chat: Within 2 minutes</li>
-                        <li>• Urgent issues: 24/7 support</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section> */}
-
       {/* Office Locations */}
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-foreground mb-4">Our Office Locations</h2>
+            <h2 className="text-3xl font-bold text-foreground mb-4">Our Locations</h2>
             <p className="text-muted-foreground">
-              Visit us at any of our offices across India for in-person support
+              Visit us at any of our premises for in-person support
             </p>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="flex flex-wrap justify-center gap-8 max-w-6xl mx-auto">
             {offices.map((office) => (
               <Card key={office.city} className="hover:shadow-elegant transition-shadow">
                 <CardHeader>
@@ -297,9 +150,7 @@ const Contact = () => {
                     <MapPin className="h-5 w-5 text-primary" />
                     <CardTitle className="text-lg">{office.city}</CardTitle>
                   </div>
-                  {office.city.includes("Head Office") && (
-                    <Badge className="w-fit bg-primary/10 text-primary">Headquarters</Badge>
-                  )}
+                <Badge className="w-fit bg-primary/10 text-primary">{office.officeType}</Badge>
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <div>
@@ -319,7 +170,7 @@ const Contact = () => {
                     <span className="text-sm">{office.hours}</span>
                   </div>
                   <a
-                    href="https://www.google.com/maps?rlz=1C1CHBD_enIN1123IN1123&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIICAEQABgNGB4yCggCEAAYCBgNGB4yCggDEAAYgAQYogQyCggEEAAYgAQYogQyBggFEEUYPDIGCAYQRRg8MgYIBxBFGDzSAQg1MDM1ajBqNKgCALACAQ&um=1&ie=UTF-8&fb=1&gl=in&sa=X&geocode=KT2eU8gI45s5MQsIO-8cKqxj&daddr=2nd+Floor,+Cyber+Heights,+Vibhuti+Khand,+Gomti+Nagar,+Lucknow,+Uttar+Pradesh+226010"
+                    href={office.geoLocation}
                     target="_blank"
                     rel="noopener noreferrer"
                   > 
@@ -331,60 +182,6 @@ const Contact = () => {
               </Card>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* FAQ Section */}
-      <section className="py-16 bg-accent/30">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-foreground mb-4">Frequently Asked Questions</h2>
-            <p className="text-muted-foreground">
-              Quick answers to common questions
-            </p>
-          </div>
-          
-          <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
-            {[
-              {
-                question: "What are your delivery timelines?",
-                answer: "We offer same-day delivery in metros and 2-3 days delivery in other cities across India."
-              },
-              {
-                question: "Do you offer bulk pricing?",
-                answer: "Yes, we provide competitive bulk pricing for contractors and builders with volume discounts."
-              },
-              {
-                question: "How can I become a retail partner?",
-                answer: "Fill out our partnership form or call our partnership team. No minimum investment required."
-              },
-              {
-                question: "What quality certifications do you have?",
-                answer: "All our products are BIS certified and tested in our in-house laboratory."
-              },
-              {
-                question: "Do you provide technical support?",
-                answer: "Yes, our technical experts provide guidance on product selection and application methods."
-              },
-              {
-                question: "What payment options are available?",
-                answer: "We accept all major payment methods including UPI, cards, NEFT, and offer 45-day credit terms for partners."
-              }
-            ].map((faq) => (
-              <Card key={faq.question} className="hover:shadow-elegant transition-shadow">
-                <CardContent className="p-6">
-                  <h4 className="font-semibold mb-3">{faq.question}</h4>
-                  <p className="text-sm text-muted-foreground">{faq.answer}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-          
-          {/* <div className="text-center mt-8">
-            <Button variant="outline">
-              View All FAQs
-            </Button>
-          </div> */}
         </div>
       </section>
 
