@@ -1,0 +1,53 @@
+{
+  "testimonials": [
+    {
+      "name": "Rajesh Kumar",
+      "role": "Site Contractor",
+      "rating": 5,
+      "quote": "NirmanNext has transformed how we manage our material procurement. The bulk pricing and 45-day credit has improved our cash flow significantly. We've saved over ₹2L in the last quarter alone.",
+      "impact": "₹2L+ saved in Q1"
+    },
+    {
+      "name": "Priya Sharma",
+      "role": "Material Retailer",
+      "rating": 5,
+      "quote": "The private label opportunity has been a game-changer. No inventory risk, better margins, and my customers love the quality. My business has grown 40% since joining NirmanNext.",
+      "impact": "40% business growth"
+    },
+    {
+      "name": "Amit Patel",
+      "role": "Architect",
+      "rating": 5,
+      "quote": "Quality consistency and delivery reliability are crucial for our projects. NirmanNext has never let us down. The material specifications are always accurate and delivery is always on time.",
+      "impact": "100% on-time delivery"
+    }
+  ],
+  "stats": [
+    {
+      "icon": "Users",
+      "number": "100+",
+      "label": "Active Professionals",
+      "growth": "10x this year"
+    },
+    {
+      "icon": "TrendingUp",
+      "number": "5000 Ton+",
+      "label": "Materials Delivered",
+      "growth": "+25% MoM"
+    },
+    {
+      "icon": "Award",
+      "number": "20+",
+      "label": "Cities Served",
+      "growth": "Expanding quarterly"
+    }
+  ],
+  "partners": [
+    "RockGrip",
+    "ACC Limited",
+    "Tata Steel",
+    "Asian Paints",
+    "Berger Paints",
+    "Pidilite"
+  ]
+}
