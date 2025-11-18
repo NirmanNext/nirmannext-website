@@ -143,100 +143,106 @@ export default function Products() {
       <Navigation />
 
       {/* Hero */}
-      <section className="bg-gradient-subtle py-12 border-b">
+      {/* Hero Section - Dark Industrial Style */}
+      {/* Hero Section - Asymmetric Split (Technical/Engineered) */}
+      <section className="bg-gradient-subtle py-16 md:py-20 border-b">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-              Premium Construction Materials
-            </h1>
-            <p className="text-lg text-muted-foreground mb-6 max-w-2xl mx-auto">
-              One-stop catalog for RockGrip adhesives and PlasterKing wall-care products.
-            </p>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            {/* === LEFT COLUMN: HEADLINE AND TEXT (lg:col-span-5) === */}
+            <div className="lg:col-span-5 text-center lg:text-left">
+              {/* <Badge variant="secondary" className="mb-4 px-3 py-1 text-sm font-medium text-primary bg-primary/10 border-primary/20 hover:bg-primary/15 transition-colors">
+                TECHNICAL SPECIFICATIONS
+              </Badge> */}
 
-            {/* Search & Filters */}
-            <div className="flex flex-col md:flex-row gap-4 items-center justify-center max-w-3xl mx-auto">
-              <div className="relative flex-1 w-full">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
-                <Input
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  placeholder="Search products, brands, certifications..."
-                  className="pl-10"
-                  aria-label="Search products"
-                />
-              </div>
-
-              {/* Brand select */}
-              <Select
-                value={brandFilter ?? "all"}
-                onValueChange={(v) => setBrandFilter(v === "all" ? null : v)}
-              >
-                <SelectTrigger className="w-full md:w-44">
-                  <SelectValue placeholder="Brand" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Brands</SelectItem>
-                  {uniqueBrands.map((b) => (
-                    <SelectItem key={b} value={b || `brand-${b}`}>
-                      {b}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-
-              {/* Category select */}
-              <Select
-                value={categoryFilter ?? "all"}
-                onValueChange={(v) => setCategoryFilter(v === "all" ? null : v)}
-              >
-                <SelectTrigger className="w-full md:w-44">
-                  <Package className="h-4 w-4 mr-2" />
-                  <SelectValue placeholder="Category" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Categories</SelectItem>
-                  {uniqueCategories.map((c) => (
-                    <SelectItem key={c} value={c || `cat-${c}`}>
-                      {c}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-
-              {/* Application Area select */}
-              <Select
-                value={appAreaFilter ?? "all"}
-                onValueChange={(v) => setAppAreaFilter(v === "all" ? null : v)}
-              >
-                <SelectTrigger className="w-full md:w-40">
-                  <SelectValue placeholder="Application Area" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Areas</SelectItem>
-                  {uniqueAppAreas.map((a) => (
-                    <SelectItem key={a} value={a || `area-${a}`}>
-                      {a}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-
-              {/* Availability */}
-              <Select
-                value={availabilityFilter}
-                onValueChange={(v) => setAvailabilityFilter(v || "any")}
-              >
-                <SelectTrigger className="w-full md:w-40">
-                  <Truck className="h-4 w-4 mr-2" />
-                  <SelectValue placeholder="Availability" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="any">Any</SelectItem>
-                  <SelectItem value="in">In Stock</SelectItem>
-                  <SelectItem value="out">Out of Stock</SelectItem>
-                </SelectContent>
-              </Select>
+              <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-foreground mb-4 leading-tight">
+                Engineered for <span className="text-primary">Precision</span>.
+              </h1>
+              
+              <p className="text-lg text-muted-foreground mb-8">
+                Explore the full catalog of <span className="font-semibold text-foreground">RockGrip</span> adhesives and <span className="font-semibold text-foreground">PlasterKing</span> solutions. Search by application, certification, or product name.
+              </p>
             </div>
+
+            {/* === RIGHT COLUMN: SEARCH AND FILTERS (lg:col-span-7) === */}
+            <div className="lg:col-span-7 relative">
+              <div className="p-6 md:p-8 bg-gray-50/70 dark:bg-slate-800/70 border border-dashed border-muted-foreground/30 rounded-xl shadow-lg shadow-primary/5 backdrop-blur-sm">
+                
+                {/* Search Input */}
+                <div className="relative flex w-full mb-6">
+                  <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
+                  <Input
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    placeholder="Search product name, certification, or application area..."
+                    className="pl-10 h-12 text-base rounded-lg border-2 border-primary/20 focus-visible:ring-primary focus-visible:border-primary transition-colors bg-white dark:bg-slate-900"
+                    aria-label="Search products"
+                  />
+                </div>
+
+                {/* Filters Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                  {/* Brand select */}
+                  <Select
+                      value={brandFilter ?? "all"}
+                      onValueChange={(v) => setBrandFilter(v === "all" ? null : v)}
+                  >
+                      <SelectTrigger className="w-full bg-white dark:bg-slate-900 border-primary/10 hover:border-primary/30 focus:ring-0 h-10">
+                      <SelectValue placeholder="Brand" />
+                      </SelectTrigger>
+                      <SelectContent>
+                      <SelectItem value="all">All Brands</SelectItem>
+                      {uniqueBrands.map((b) => <SelectItem key={b} value={b || `brand-${b}`}>{b}</SelectItem>)}
+                      </SelectContent>
+                  </Select>
+
+                  {/* Category select */}
+                  <Select
+                      value={categoryFilter ?? "all"}
+                      onValueChange={(v) => setCategoryFilter(v === "all" ? null : v)}
+                  >
+                      <SelectTrigger className="w-full bg-white dark:bg-slate-900 border-primary/10 hover:border-primary/30 focus:ring-0 h-10">
+                      <SelectValue placeholder="Category" />
+                      </SelectTrigger>
+                      <SelectContent>
+                      <SelectItem value="all">All Categories</SelectItem>
+                      {uniqueCategories.map((c) => <SelectItem key={c} value={c || `cat-${c}`}>{c}</SelectItem>)}
+                      </SelectContent>
+                  </Select>
+
+                  {/* Application Area select */}
+                  <Select
+                      value={appAreaFilter ?? "all"}
+                      onValueChange={(v) => setAppAreaFilter(v === "all" ? null : v)}
+                  >
+                      <SelectTrigger className="w-full bg-white dark:bg-slate-900 border-primary/10 hover:border-primary/30 focus:ring-0 h-10">
+                      <SelectValue placeholder="Application Area" />
+                      </SelectTrigger>
+                      <SelectContent>
+                      <SelectItem value="all">All Areas</SelectItem>
+                      {uniqueAppAreas.map((a) => <SelectItem key={a} value={a || `area-${a}`}>{a}</SelectItem>)}
+                      </SelectContent>
+                  </Select>
+
+                  {/* Availability */}
+                  <Select
+                      value={availabilityFilter}
+                      onValueChange={(v) => setAvailabilityFilter(v || "any")}
+                  >
+                      <SelectTrigger className="w-full bg-white dark:bg-slate-900 border-primary/10 hover:border-primary/30 focus:ring-0 h-10">
+                      <SelectValue placeholder="Stock" />
+                      </SelectTrigger>
+                      <SelectContent>
+                      <SelectItem value="any">Any Stock</SelectItem>
+                      <SelectItem value="in">In Stock</SelectItem>
+                      <SelectItem value="out">Out of Stock</SelectItem>
+                      </SelectContent>
+                  </Select>
+                </div>
+              </div>
+            </div>
+            {/* === END RIGHT COLUMN === */}
+
           </div>
         </div>
       </section>
