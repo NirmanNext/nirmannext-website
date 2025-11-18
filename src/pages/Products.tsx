@@ -4,7 +4,7 @@ import Navigation from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Search, Package, Truck, Shield } from "lucide-react";
+import { Search, Package, Truck, Shield, X, ZoomIn } from "lucide-react"; // Added X and ZoomIn
 import { Input } from "@/components/ui/input";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 
@@ -40,8 +40,6 @@ const productsData: Product[] = (productsDataRaw as unknown) as Product[];
  * Glob-import product asset files from src/assets/products/
  * - eager: true -> returns URLs at build time
  * - as: "url" -> returns string URLs (instead of module)
- *
- * Note: Type assertion to Record<string,string> helps TS. Vite provides import.meta.glob.
  */
 const importedProductImages = import.meta.glob<
   string
@@ -52,8 +50,6 @@ const importedProductImages = import.meta.glob<
 
 /**
  * Utility: resolve an image path from JSON to the actual URL returned by import.meta.glob.
- * - Accepts paths like "/src/assets/products/TA01.png" (what you're using in JSON)
- * - Also attempts basenames if JSON contains only filename or relative path.
  */
 function resolveImageUrl(imagePath?: string): string | undefined {
   if (!imagePath) return undefined;
@@ -98,6 +94,9 @@ export default function Products() {
   const [categoryFilter, setCategoryFilter] = useState<string | null>(null);
   const [appAreaFilter, setAppAreaFilter] = useState<string | null>(null);
   const [availabilityFilter, setAvailabilityFilter] = useState<string>("any"); // 'any'|'in'|'out'
+
+  // 🔥 State for Image Viewer (PiP Mode)
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
 
   // debounce search input (300ms)
   React.useEffect(() => {
@@ -161,7 +160,7 @@ export default function Products() {
                 <Input
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
-                  placeholder="Search products, brands, certifications or application area..."
+                  placeholder="Search products, brands, certifications..."
                   className="pl-10"
                   aria-label="Search products"
                 />
@@ -178,7 +177,6 @@ export default function Products() {
                 <SelectContent>
                   <SelectItem value="all">All Brands</SelectItem>
                   {uniqueBrands.map((b) => (
-                    // ensure no empty string value
                     <SelectItem key={b} value={b || `brand-${b}`}>
                       {b}
                     </SelectItem>
@@ -261,9 +259,6 @@ export default function Products() {
               >
                 Clear filters
               </Button>
-              <Badge className="bg-primary/10 text-primary-foreground">
-                RockGrip & PlasterKing
-              </Badge>
             </div>
           </div>
 
@@ -274,23 +269,29 @@ export default function Products() {
 
               return (
                 <Card key={p.id} className="hover:shadow-elegant transition-all">
-                  <div className="aspect-video bg-gray-50 flex items-center justify-center overflow-hidden">
+                  <div 
+                    className="aspect-video bg-gray-50 flex items-center justify-center overflow-hidden relative group cursor-zoom-in"
+                    onClick={() => imageUrl && setPreviewImage(imageUrl)} // 🔥 Open Image on Click
+                  >
                     {imageUrl ? (
-                      <img
-                        src={imageUrl}
-                        alt={p.name}
-                        className="h-36 object-contain"
-                        loading="lazy"
-                        // on error, hide the image to allow icon fallback
-                        onError={(e) => {
-                          // hide broken image and clear src so browser doesn't repeatedly try
-                          const el = e.currentTarget as HTMLImageElement;
-                          el.style.display = "none";
-                          el.src = "";
-                        }}
-                      />
+                      <>
+                        <img
+                          src={imageUrl}
+                          alt={p.name}
+                          className="h-36 object-contain transition-transform duration-300 group-hover:scale-105"
+                          loading="lazy"
+                          onError={(e) => {
+                            const el = e.currentTarget as HTMLImageElement;
+                            el.style.display = "none";
+                            el.src = "";
+                          }}
+                        />
+                        {/* Hint overlay */}
+                        <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <ZoomIn className="text-gray-600 opacity-60" />
+                        </div>
+                      </>
                     ) : (
-                      // fallback icon if no image available or resolution failed
                       <Shield className="h-12 w-12 text-muted-foreground/40" aria-hidden />
                     )}
                   </div>
@@ -320,10 +321,25 @@ export default function Products() {
                         )}
                       </div>
 
-                      <div className="text-right">
-                        <div className="text-xs text-muted-foreground">
-                          {p.available ? "In stock" : "Out of stock"}
-                        </div>
+                      <div className="text-right shrink-0 ml-2">
+                        {p.available ? (
+                          <div className="flex items-center justify-end gap-2">
+                            <span className="relative flex h-2.5 w-2.5">
+                              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-600"></span>
+                            </span>
+                            <span className="text-sm font-semibold text-green-700 tracking-tight whitespace-nowrap">
+                              In Stock
+                            </span>
+                          </div>
+                        ) : (
+                          <div className="flex items-center justify-end gap-2">
+                            <span className="flex h-2.5 w-2.5 rounded-full bg-gray-300"></span>
+                            <span className="text-sm font-medium text-muted-foreground whitespace-nowrap">
+                              Out of Stock
+                            </span>
+                          </div>
+                        )}
                       </div>
                     </div>
 
@@ -336,18 +352,15 @@ export default function Products() {
                         ))}
                       </div>
                       <div className="flex items-center gap-3">
-                        <Button size="sm" variant="ghost" onClick={() => {
-                          // simple stub — wire this to RFQ flow
+                        {/* <Button size="sm" variant="ghost" onClick={() => {
                           window.alert(`Request RFQ for ${p.name}`);
                         }}>
                           Request RFQ
-                        </Button>
+                        </Button> */}
                         <Button size="sm" onClick={() => {
-                          const phone = "919819992488"; // WhatsApp requires country code without +
-                          // open WA link fallback (simple)
+                          const phone = "919819992488"; 
                           const msg = encodeURIComponent(`Hi, I want to ask about ${p.name} (${p.id})`);
                           const waUrl = `https://wa.me/${phone}?text=${msg}`;
-                          // open whatsapp web (user may not have WA installed)
                           window.open(waUrl, "_blank");
                         }}>
                           WhatsApp
@@ -379,6 +392,35 @@ export default function Products() {
         </div>
       </section>
       {/* <FloatingWhatsApp /> */}
+
+      {/* 🔥 IMAGE VIEWER MODAL (PIP MODE) */}
+      {previewImage && (
+        <div 
+            className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-200"
+            onClick={() => setPreviewImage(null)} // Close on background click
+        >
+            {/* Close Button */}
+            <button 
+                onClick={() => setPreviewImage(null)}
+                className="absolute top-4 right-4 p-2 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors"
+            >
+                <X className="h-8 w-8" />
+            </button>
+
+            {/* Image Content */}
+            <div 
+                className="relative max-w-5xl w-full max-h-[90vh] flex items-center justify-center"
+                onClick={(e) => e.stopPropagation()} // Prevent click-through
+            >
+                <img 
+                    src={previewImage} 
+                    alt="Product Preview" 
+                    className="max-w-full max-h-[85vh] object-contain rounded-md shadow-2xl"
+                />
+            </div>
+        </div>
+      )}
+      
     </div>
   );
 }

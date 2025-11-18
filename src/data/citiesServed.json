@@ -1,0 +1,196 @@
+[
+  {
+    "state": "Uttar Pradesh",
+    "city": "Kanpur",
+    "description": "Kanpur, the Leather City of India, is a major industrial hub on the banks of the Ganges.",
+    "image": "/images/cities/kanpur.jpeg"
+  },
+  {
+    "state": "Uttar Pradesh",
+    "city": "Lucknow",
+    "description": "Lucknow, the City of Nawabs, is known for its rich heritage, cuisine, and elegant Tehzeeb.",
+    "image": "/images/cities/lucknow.png"
+  },
+  {
+    "state": "Uttar Pradesh",
+    "city": "Orai",
+    "description": "Orai is known for its agriculture, trade, and cultural heritage.",
+    "image": "/images/cities/orai.jpg"
+  },
+  {
+    "state": "Uttar Pradesh",
+    "city": "Etawah",
+    "description": "Etawah (Ishtikapuri) is situated along the Yamuna River and has significant historical value.",
+    "image": "/images/cities/etawah.avif"
+  },
+  {
+    "state": "Uttar Pradesh",
+    "city": "Jalaun",
+    "description": "Jalaun is famous for historical sites like Chaurasi Gumbad and has cultural significance.",
+    "image": "/images/cities/jalaun.jpeg"
+  },
+  {
+    "state": "Uttar Pradesh",
+    "city": "Auraiya",
+    "description": "Auraiya is known for its wooden furniture industry and regional trade significance.",
+    "image": "/images/cities/auraiya.jpeg"
+  },
+  {
+    "state": "Uttar Pradesh",
+    "city": "Lalitpur",
+    "description": "Lalitpur is known for mineral-rich regions, cultural sites, and historical architecture.",
+    "image": "/images/cities/lalitpur.avif"
+  },
+  {
+    "state": "Uttar Pradesh",
+    "city": "Hamirpur",
+    "description": "Hamirpur is known for Pataleshwar temple, Meher Baba heritage, and scenic locations.",
+    "image": "/images/cities/hamirpur.jpg"
+  },
+  {
+    "state": "Uttar Pradesh",
+    "city": "Banda",
+    "description": "Banda is famous for Shajar stone, Gomed gemstones, and the historic Kalinjar fort.",
+    "image": "/images/cities/banda.jpeg"
+  },
+  {
+    "state": "Uttar Pradesh",
+    "city": "Ghatampur",
+    "description": "Ghatampur is known for Kushmanda Devi Temple and the upcoming thermal power station.",
+    "image": "/images/cities/ghatampur.jpeg"
+  },
+  {
+    "state": "Uttar Pradesh",
+    "city": "Chitrakoot",
+    "description": "Chitrakoot is an ancient holy town deeply connected to Ramayana mythology.",
+    "image": "/images/cities/chitrakoot.avif"
+  },
+  {
+    "state": "Uttar Pradesh",
+    "city": "Mahoba",
+    "description": "Mahoba is famous for Chandela dynasty history, stone carvings, temples, and lakes.",
+    "image": "/images/cities/mahoba.jpeg"
+  },
+  {
+    "state": "Uttar Pradesh",
+    "city": "Unnao",
+    "description": "Unnao is known for its leather industry, historic temples, and heritage sites.",
+    "image": "/images/cities/unnao.jpg"
+  },
+  {
+    "state": "Uttar Pradesh",
+    "city": "Fatehpur",
+    "description": "Fatehpur is a historic town known for temples, heritage sites, and agriculture.",
+    "image": "/images/cities/fatehpur.jpg"
+  },
+  {
+    "state": "Uttar Pradesh",
+    "city": "Jhansi",
+    "description": "Jhansi, the City of Warriors, is known for the Rani Lakshmi Bai fort and Bundelkhand heritage.",
+    "image": "/images/cities/jhansi.avif"
+  },
+
+  {
+    "state": "Uttar Pradesh",
+    "city": "Barabanki",
+    "description": "Barabanki is known for its agriculture, particularly mentha oil, and is near the state capital Lucknow.",
+    "image": "/images/cities/barabanki.jpg"
+  },
+  {
+    "state": "Uttar Pradesh",
+    "city": "Ayodhya",
+    "description": "Ayodhya is a sacred city, known as the birthplace of Lord Rama and a major religious pilgrimage center.",
+    "image": "/images/cities/ayodhya.jpeg"
+  },
+  {
+    "state": "Uttar Pradesh",
+    "city": "Sultanpur",
+    "description": "Sultanpur is a historic city situated on the banks of the Gomti River, known for its regional administration and trade.",
+    "image": "/images/cities/sultanpur.jpg"
+  },
+  {
+    "state": "Uttar Pradesh",
+    "city": "Sitapur",
+    "description": "Sitapur is known for its carpet industry and is famous for the religious site of Naimisharanya.",
+    "image": "/images/cities/sitapur.jpeg"
+  },
+  {
+    "state": "Uttar Pradesh",
+    "city": "Gorakhpur",
+    "description": "Gorakhpur is a major economic and religious hub in Eastern UP, known for Gorakhnath Temple and publishing houses.",
+    "image": "/images/cities/gorakhpur.jpg"
+  },
+  {
+    "state": "Uttar Pradesh",
+    "city": "Raebareli",
+    "description": "Raebareli is an industrial and political hub, featuring the Indira Gandhi Memorial Botanical Garden.",
+    "image": "/images/cities/raebareli.jpg"
+  },
+  {
+    "state": "Uttar Pradesh",
+    "city": "Pokhraya",
+    "description": "Pokhraya is a small town near Kanpur, known for its strategic location and regional trade connections.",
+    "image": "/images/cities/pokhraya.jpg"
+  },
+  {
+    "state": "Uttar Pradesh",
+    "city": "Kalpi",
+    "description": "Kalpi is a historic city on the Yamuna river, famous as the birthplace of Sage Ved Vyasa and for its ancient ruins.",
+    "image": "/images/cities/kalpi.jpeg"
+  },
+  {
+    "state": "Uttar Pradesh",
+    "city": "Prayagraj",
+    "description": "Prayagraj (formerly Allahabad) is renowned for the Triveni Sangam, the confluence of three holy rivers, and as a judicial capital.",
+    "image": "/images/cities/prayagraj.jpg"
+  },
+  {
+    "state": "Uttar Pradesh",
+    "city": "Varanasi",
+    "description": "Varanasi (Kashi) is the spiritual capital of India, known for its ghats, ancient temples, and as a center of culture and learning.",
+    "image": "/images/cities/varanasi.jpg"
+  },
+  {
+    "state": "Uttar Pradesh",
+    "city": "Agra",
+    "description": "Agra is famous worldwide for the Taj Mahal, the Agra Fort, and its rich Mughal architectural heritage.",
+    "image": "/images/cities/agra.jpg"
+  },
+  {
+    "state": "Uttar Pradesh",
+    "city": "Meerut",
+    "description": "Meerut is a historic city known as the starting point of the 1857 Indian Rebellion and is a major sports goods production center.",
+    "image": "/images/cities/meerut.jpg"
+  },
+  {
+    "state": "Uttar Pradesh",
+    "city": "Kannauj",
+    "description": "Kannauj is the 'Perfume Capital of India,' famous for its traditional attar manufacturing and rose water distillation.",
+    "image": "/images/cities/kannauj.jpg"
+  },
+  {
+    "state": "Uttar Pradesh",
+    "city": "Farukhabad",
+    "description": "Farukhabad is renowned for its printing and embroidery work, particularly *zari* and silk printing.",
+    "image": "/images/cities/farukhabad.jpg"
+  },
+
+  {
+    "state": "Madhya Pradesh",
+    "city": "Gwalior",
+    "description": "Gwalior is a historic city known for its magnificent hill fort, palaces, and being a center for Hindustani classical music.",
+    "image": "/images/cities/gwalior.jpg"
+  },
+  {
+    "state": "Madhya Pradesh",
+    "city": "Bhopal",
+    "description": "Bhopal, the capital of MP, is known as the 'City of Lakes' and features prominent cultural and historical museums.",
+    "image": "/images/cities/bhopal.jpg"
+  },
+  {
+    "state": "Madhya Pradesh",
+    "city": "Bhind",
+    "description": "Bhind is a city in the Chambal region, known for its historical fort and regional agricultural significance.",
+    "image": "/images/cities/bhind.jpg"
+  }
+]
