@@ -1,20 +1,21 @@
-import { useState, useEffect } from "react";
+// src/components/Hero.tsx
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Play } from "lucide-react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import heroImage from "@/assets/hero-construction.jpg";
 import { JoinFormDialog } from "@/components/JoinFormDialog"; // ⬅️ Import dialog
 import { Link } from "react-router-dom"; // ⬅️ Import Link for navigation
+import CitiesCarousel from "@/components/CitiesCarousel"; // ⬅️ Scrolling cities component
 
-const Hero = () => {
+const Hero: React.FC = () => {
   const [currentHeadline, setCurrentHeadline] = useState(0);
   const [openForm, setOpenForm] = useState(false); // ⬅️ State for form dialog
-  
+
   const headlines = [
-    "Powering Every Build — From Homes to High-Rises",
-    "Builders Build Smarter with Bulk Pricing & Reliable Delivery", 
-    "Architects Achieve Precision with Premium Materials",
-    "Homeowners Build Confidently with Expert Guidance & Trusted Quality"
+    "From Homes to High-Rises",
+    "Bulk Pricing & Reliable Delivery",
+    "Expert Guidance & Trusted Quality",
   ];
 
   useEffect(() => {
@@ -50,16 +51,17 @@ const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image */}
-      <div 
+      <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${heroImage})`,
         }}
+        aria-hidden="true"
       />
-      
+
       {/* Background Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-transparent" />
-      
+      <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-transparent" aria-hidden="true" />
+
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 text-center text-white">
         <div className="max-w-5xl mx-auto">
@@ -72,8 +74,13 @@ const Hero = () => {
             >
               <ChevronLeft size={32} />
             </button>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight m-0">
-              <span className="block animate-fade-in key={currentHeadline}">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight m-0 max-w-3xl">
+              <span
+                key={currentHeadline}
+                className="block animate-fade-in"
+                aria-live="polite"
+                aria-atomic="true"
+              >
                 {headlines[currentHeadline]}
               </span>
             </h1>
@@ -85,13 +92,13 @@ const Hero = () => {
               <ChevronRight size={32} />
             </button>
           </div>
-          
+
           {/* Subtext */}
           <p className="text-xl md:text-2xl text-gray-200 mb-8 max-w-3xl mx-auto leading-relaxed">
-            Your trusted partner for affordable quality, innovative private-label brands, 
-            and a growing professional network.
+            Your trusted partner for affordable quality, innovative private-label brands, and a growing professional
+            network.
           </p>
-          
+
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
             <Link to="/products">
@@ -112,7 +119,7 @@ const Hero = () => {
           </div>
 
           {/* Trust Indicators */}
-          <div className="flex flex-wrap justify-center items-center gap-8 text-gray-300">
+          <div className="flex flex-wrap justify-center items-center gap-8 text-gray-300 mb-8">
             <div className="text-center">
               <div className="text-2xl font-bold text-white">100+</div>
               <div className="text-sm">Active Professionals</div>
@@ -130,9 +137,18 @@ const Hero = () => {
               <div className="text-sm">Repeat Orders</div>
             </div>
           </div>
+
+          {/* Cities Carousel (hooked here) */}
+          <div className="mx-auto max-w-4xl bg-white/20 backdrop-blur-md rounded-xl p-4 shadow-lg">
+            <h3 className="text-sm text-white font-semibold mb-3 text-center tracking-wide">
+              Serving Locations
+            </h3>
+            <CitiesCarousel />
+          </div>
+
         </div>
       </div>
-      
+
       {/* Scroll Indicator */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-pulse">
         <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">
