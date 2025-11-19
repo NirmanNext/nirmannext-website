@@ -18,8 +18,8 @@ const Footer: React.FC = () => {
 
   const supportLinks = [
     { label: "FAQ", href: "/faqs" },
-    { label: "Terms & Conditions", href: "/terms" },
-    { label: "Privacy Policy", href: "/privacy" }
+    { label: "Terms & Conditions", href: "/Terms" },
+    { label: "Privacy Policy", href: "/Privacy-Policy" }
   ];
 
   return (
