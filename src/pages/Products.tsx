@@ -4,7 +4,7 @@ import Navigation from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Search, Package, Truck, Shield } from "lucide-react";
+import { Search, Package, Truck, Shield, X, ZoomIn } from "lucide-react"; // Added X and ZoomIn
 import { Input } from "@/components/ui/input";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 
@@ -40,8 +40,6 @@ const productsData: Product[] = (productsDataRaw as unknown) as Product[];
  * Glob-import product asset files from src/assets/products/
  * - eager: true -> returns URLs at build time
  * - as: "url" -> returns string URLs (instead of module)
- *
- * Note: Type assertion to Record<string,string> helps TS. Vite provides import.meta.glob.
  */
 const importedProductImages = import.meta.glob<
   string
@@ -52,8 +50,6 @@ const importedProductImages = import.meta.glob<
 
 /**
  * Utility: resolve an image path from JSON to the actual URL returned by import.meta.glob.
- * - Accepts paths like "/src/assets/products/TA01.png" (what you're using in JSON)
- * - Also attempts basenames if JSON contains only filename or relative path.
  */
 function resolveImageUrl(imagePath?: string): string | undefined {
   if (!imagePath) return undefined;
@@ -98,6 +94,9 @@ export default function Products() {
   const [categoryFilter, setCategoryFilter] = useState<string | null>(null);
   const [appAreaFilter, setAppAreaFilter] = useState<string | null>(null);
   const [availabilityFilter, setAvailabilityFilter] = useState<string>("any"); // 'any'|'in'|'out'
+
+  // 🔥 State for Image Viewer (PiP Mode)
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
 
   // debounce search input (300ms)
   React.useEffect(() => {
@@ -144,101 +143,106 @@ export default function Products() {
       <Navigation />
 
       {/* Hero */}
-      <section className="bg-gradient-subtle py-12 border-b">
+      {/* Hero Section - Dark Industrial Style */}
+      {/* Hero Section - Asymmetric Split (Technical/Engineered) */}
+      <section className="bg-gradient-subtle py-16 md:py-20 border-b">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-              Premium Construction Materials
-            </h1>
-            <p className="text-lg text-muted-foreground mb-6 max-w-2xl mx-auto">
-              One-stop catalog for RockGrip adhesives and PlasterKing wall-care products.
-            </p>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            {/* === LEFT COLUMN: HEADLINE AND TEXT (lg:col-span-5) === */}
+            <div className="lg:col-span-5 text-center lg:text-left">
+              {/* <Badge variant="secondary" className="mb-4 px-3 py-1 text-sm font-medium text-primary bg-primary/10 border-primary/20 hover:bg-primary/15 transition-colors">
+                TECHNICAL SPECIFICATIONS
+              </Badge> */}
 
-            {/* Search & Filters */}
-            <div className="flex flex-col md:flex-row gap-4 items-center justify-center max-w-3xl mx-auto">
-              <div className="relative flex-1 w-full">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
-                <Input
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  placeholder="Search products, brands, certifications or application area..."
-                  className="pl-10"
-                  aria-label="Search products"
-                />
-              </div>
-
-              {/* Brand select */}
-              <Select
-                value={brandFilter ?? "all"}
-                onValueChange={(v) => setBrandFilter(v === "all" ? null : v)}
-              >
-                <SelectTrigger className="w-full md:w-44">
-                  <SelectValue placeholder="Brand" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Brands</SelectItem>
-                  {uniqueBrands.map((b) => (
-                    // ensure no empty string value
-                    <SelectItem key={b} value={b || `brand-${b}`}>
-                      {b}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-
-              {/* Category select */}
-              <Select
-                value={categoryFilter ?? "all"}
-                onValueChange={(v) => setCategoryFilter(v === "all" ? null : v)}
-              >
-                <SelectTrigger className="w-full md:w-44">
-                  <Package className="h-4 w-4 mr-2" />
-                  <SelectValue placeholder="Category" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Categories</SelectItem>
-                  {uniqueCategories.map((c) => (
-                    <SelectItem key={c} value={c || `cat-${c}`}>
-                      {c}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-
-              {/* Application Area select */}
-              <Select
-                value={appAreaFilter ?? "all"}
-                onValueChange={(v) => setAppAreaFilter(v === "all" ? null : v)}
-              >
-                <SelectTrigger className="w-full md:w-40">
-                  <SelectValue placeholder="Application Area" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Areas</SelectItem>
-                  {uniqueAppAreas.map((a) => (
-                    <SelectItem key={a} value={a || `area-${a}`}>
-                      {a}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-
-              {/* Availability */}
-              <Select
-                value={availabilityFilter}
-                onValueChange={(v) => setAvailabilityFilter(v || "any")}
-              >
-                <SelectTrigger className="w-full md:w-40">
-                  <Truck className="h-4 w-4 mr-2" />
-                  <SelectValue placeholder="Availability" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="any">Any</SelectItem>
-                  <SelectItem value="in">In Stock</SelectItem>
-                  <SelectItem value="out">Out of Stock</SelectItem>
-                </SelectContent>
-              </Select>
+              <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-foreground mb-4 leading-tight">
+                Engineered for <span className="text-primary">Precision</span>.
+              </h1>
+              
+              <p className="text-lg text-muted-foreground mb-8">
+                Explore the full catalog of <span className="font-semibold text-foreground">RockGrip</span> adhesives and <span className="font-semibold text-foreground">PlasterKing</span> solutions. Search by application, certification, or product name.
+              </p>
             </div>
+
+            {/* === RIGHT COLUMN: SEARCH AND FILTERS (lg:col-span-7) === */}
+            <div className="lg:col-span-7 relative">
+              <div className="p-6 md:p-8 bg-gray-50/70 dark:bg-slate-800/70 border border-dashed border-muted-foreground/30 rounded-xl shadow-lg shadow-primary/5 backdrop-blur-sm">
+                
+                {/* Search Input */}
+                <div className="relative flex w-full mb-6">
+                  <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
+                  <Input
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    placeholder="Search product name, certification, or application area..."
+                    className="pl-10 h-12 text-base rounded-lg border-2 border-primary/20 focus-visible:ring-primary focus-visible:border-primary transition-colors bg-white dark:bg-slate-900"
+                    aria-label="Search products"
+                  />
+                </div>
+
+                {/* Filters Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                  {/* Brand select */}
+                  <Select
+                      value={brandFilter ?? "all"}
+                      onValueChange={(v) => setBrandFilter(v === "all" ? null : v)}
+                  >
+                      <SelectTrigger className="w-full bg-white dark:bg-slate-900 border-primary/10 hover:border-primary/30 focus:ring-0 h-10">
+                      <SelectValue placeholder="Brand" />
+                      </SelectTrigger>
+                      <SelectContent>
+                      <SelectItem value="all">All Brands</SelectItem>
+                      {uniqueBrands.map((b) => <SelectItem key={b} value={b || `brand-${b}`}>{b}</SelectItem>)}
+                      </SelectContent>
+                  </Select>
+
+                  {/* Category select */}
+                  <Select
+                      value={categoryFilter ?? "all"}
+                      onValueChange={(v) => setCategoryFilter(v === "all" ? null : v)}
+                  >
+                      <SelectTrigger className="w-full bg-white dark:bg-slate-900 border-primary/10 hover:border-primary/30 focus:ring-0 h-10">
+                      <SelectValue placeholder="Category" />
+                      </SelectTrigger>
+                      <SelectContent>
+                      <SelectItem value="all">All Categories</SelectItem>
+                      {uniqueCategories.map((c) => <SelectItem key={c} value={c || `cat-${c}`}>{c}</SelectItem>)}
+                      </SelectContent>
+                  </Select>
+
+                  {/* Application Area select */}
+                  <Select
+                      value={appAreaFilter ?? "all"}
+                      onValueChange={(v) => setAppAreaFilter(v === "all" ? null : v)}
+                  >
+                      <SelectTrigger className="w-full bg-white dark:bg-slate-900 border-primary/10 hover:border-primary/30 focus:ring-0 h-10">
+                      <SelectValue placeholder="Application Area" />
+                      </SelectTrigger>
+                      <SelectContent>
+                      <SelectItem value="all">All Areas</SelectItem>
+                      {uniqueAppAreas.map((a) => <SelectItem key={a} value={a || `area-${a}`}>{a}</SelectItem>)}
+                      </SelectContent>
+                  </Select>
+
+                  {/* Availability */}
+                  <Select
+                      value={availabilityFilter}
+                      onValueChange={(v) => setAvailabilityFilter(v || "any")}
+                  >
+                      <SelectTrigger className="w-full bg-white dark:bg-slate-900 border-primary/10 hover:border-primary/30 focus:ring-0 h-10">
+                      <SelectValue placeholder="Stock" />
+                      </SelectTrigger>
+                      <SelectContent>
+                      <SelectItem value="any">Any Stock</SelectItem>
+                      <SelectItem value="in">In Stock</SelectItem>
+                      <SelectItem value="out">Out of Stock</SelectItem>
+                      </SelectContent>
+                  </Select>
+                </div>
+              </div>
+            </div>
+            {/* === END RIGHT COLUMN === */}
+
           </div>
         </div>
       </section>
@@ -261,9 +265,6 @@ export default function Products() {
               >
                 Clear filters
               </Button>
-              <Badge className="bg-primary/10 text-primary-foreground">
-                RockGrip & PlasterKing
-              </Badge>
             </div>
           </div>
 
@@ -274,23 +275,29 @@ export default function Products() {
 
               return (
                 <Card key={p.id} className="hover:shadow-elegant transition-all">
-                  <div className="aspect-video bg-gray-50 flex items-center justify-center overflow-hidden">
+                  <div 
+                    className="aspect-video bg-gray-50 flex items-center justify-center overflow-hidden relative group cursor-zoom-in"
+                    onClick={() => imageUrl && setPreviewImage(imageUrl)} // 🔥 Open Image on Click
+                  >
                     {imageUrl ? (
-                      <img
-                        src={imageUrl}
-                        alt={p.name}
-                        className="h-36 object-contain"
-                        loading="lazy"
-                        // on error, hide the image to allow icon fallback
-                        onError={(e) => {
-                          // hide broken image and clear src so browser doesn't repeatedly try
-                          const el = e.currentTarget as HTMLImageElement;
-                          el.style.display = "none";
-                          el.src = "";
-                        }}
-                      />
+                      <>
+                        <img
+                          src={imageUrl}
+                          alt={p.name}
+                          className="h-36 object-contain transition-transform duration-300 group-hover:scale-105"
+                          loading="lazy"
+                          onError={(e) => {
+                            const el = e.currentTarget as HTMLImageElement;
+                            el.style.display = "none";
+                            el.src = "";
+                          }}
+                        />
+                        {/* Hint overlay */}
+                        <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <ZoomIn className="text-gray-600 opacity-60" />
+                        </div>
+                      </>
                     ) : (
-                      // fallback icon if no image available or resolution failed
                       <Shield className="h-12 w-12 text-muted-foreground/40" aria-hidden />
                     )}
                   </div>
@@ -320,10 +327,25 @@ export default function Products() {
                         )}
                       </div>
 
-                      <div className="text-right">
-                        <div className="text-xs text-muted-foreground">
-                          {p.available ? "In stock" : "Out of stock"}
-                        </div>
+                      <div className="text-right shrink-0 ml-2">
+                        {p.available ? (
+                          <div className="flex items-center justify-end gap-2">
+                            <span className="relative flex h-2.5 w-2.5">
+                              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-600"></span>
+                            </span>
+                            <span className="text-sm font-semibold text-green-700 tracking-tight whitespace-nowrap">
+                              In Stock
+                            </span>
+                          </div>
+                        ) : (
+                          <div className="flex items-center justify-end gap-2">
+                            <span className="flex h-2.5 w-2.5 rounded-full bg-gray-300"></span>
+                            <span className="text-sm font-medium text-muted-foreground whitespace-nowrap">
+                              Out of Stock
+                            </span>
+                          </div>
+                        )}
                       </div>
                     </div>
 
@@ -336,18 +358,15 @@ export default function Products() {
                         ))}
                       </div>
                       <div className="flex items-center gap-3">
-                        <Button size="sm" variant="ghost" onClick={() => {
-                          // simple stub — wire this to RFQ flow
+                        {/* <Button size="sm" variant="ghost" onClick={() => {
                           window.alert(`Request RFQ for ${p.name}`);
                         }}>
                           Request RFQ
-                        </Button>
+                        </Button> */}
                         <Button size="sm" onClick={() => {
-                          const phone = "919819992488"; // WhatsApp requires country code without +
-                          // open WA link fallback (simple)
+                          const phone = "919819992488"; 
                           const msg = encodeURIComponent(`Hi, I want to ask about ${p.name} (${p.id})`);
                           const waUrl = `https://wa.me/${phone}?text=${msg}`;
-                          // open whatsapp web (user may not have WA installed)
                           window.open(waUrl, "_blank");
                         }}>
                           WhatsApp
@@ -379,6 +398,35 @@ export default function Products() {
         </div>
       </section>
       {/* <FloatingWhatsApp /> */}
+
+      {/* 🔥 IMAGE VIEWER MODAL (PIP MODE) */}
+      {previewImage && (
+        <div 
+            className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-200"
+            onClick={() => setPreviewImage(null)} // Close on background click
+        >
+            {/* Close Button */}
+            <button 
+                onClick={() => setPreviewImage(null)}
+                className="absolute top-4 right-4 p-2 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors"
+            >
+                <X className="h-8 w-8" />
+            </button>
+
+            {/* Image Content */}
+            <div 
+                className="relative max-w-5xl w-full max-h-[90vh] flex items-center justify-center"
+                onClick={(e) => e.stopPropagation()} // Prevent click-through
+            >
+                <img 
+                    src={previewImage} 
+                    alt="Product Preview" 
+                    className="max-w-full max-h-[85vh] object-contain rounded-md shadow-2xl"
+                />
+            </div>
+        </div>
+      )}
+      
     </div>
   );
 }

@@ -74,9 +74,12 @@ export function JoinFormDialog({ open, onOpenChange }: JoinFormDialogProps) {
     }
 
     // ✅ Validate city against allowed list
-    if (!allowedCities.includes(selectedCity)) {
-      newErrors.city = `We are operational in ${allowedCities.join(", ")}. Coming soon to your city.`
+    if (Array.isArray(allowedCities) && allowedCities.length > 0) {
+      if (!allowedCities.includes(selectedCity)) {
+        newErrors.city = `We are operational in ${allowedCities.join(", ")}. Coming soon to your city.`;
+      }
     }
+
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors)

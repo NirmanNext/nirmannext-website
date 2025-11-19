@@ -12,10 +12,10 @@ const Contact = () => {
     {
       icon: Phone,
       title: "Phone Support",
-      primary: "+91 981 999 2488",
+      primary: "+91 9818069092",
       secondary: "Available 24/7 for urgent queries",
       action: "Call Now",
-      href: "tel:+919819992488"
+      href: "tel:+919818069092"
     },
     {
       icon: Mail,
@@ -74,7 +74,7 @@ const Contact = () => {
               Our expert team is ready to assist you 24/7.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="tel:+919819992488" style={{ textDecoration: 'none' }}>
+              <a href="tel:+919818069092" style={{ textDecoration: 'none' }}>
                 <Button size="lg" className="bg-primary hover:bg-primary/90">
                   <Phone className="h-5 w-5 mr-2" />
                   Call Support Now
@@ -193,7 +193,7 @@ const Contact = () => {
             Our support team is available 24/7 to help you with any queries or concerns
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="tel:+919819992488" style={{ textDecoration: 'none' }}>
+            <a href="tel:+919818069092" style={{ textDecoration: 'none' }}>
             <Button size="lg" variant="secondary">
               <Phone className="h-5 w-5 mr-2" />
               Call Support
