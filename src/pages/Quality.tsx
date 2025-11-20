@@ -36,7 +36,7 @@ const Quality = () => {
     {
       icon: Truck,
       title: "Pan-UP Coverage",
-      description: "10+ cities across UP",
+      description: "20+ cities across UP",
       highlight: "Same-day delivery in metros"
     },
     {
@@ -83,7 +83,7 @@ const Quality = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
-      
+
       {/* Hero Section */}
       <section className="bg-gradient-subtle py-20">
         <div className="container mx-auto px-4">
@@ -92,10 +92,10 @@ const Quality = () => {
               Quality & Delivery Excellence
             </Badge>
             <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6">
-              <span className="text-primary">Quality First</span>, Always
+              <span className="text-construction-orange">Quality First</span>, Always
             </h1>
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Every product we deliver meets the highest industry standards. From sourcing to delivery, 
+              Every product we deliver meets the highest industry standards. From sourcing to delivery,
               quality is embedded in every step of our process.
             </p>
             {/* <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -119,7 +119,7 @@ const Quality = () => {
               Rigorous quality control processes ensure every product meets international standards
             </p>
           </div>
-          
+
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {qualityStandards.map((standard) => {
               const IconComponent = standard.icon;
@@ -145,15 +145,15 @@ const Quality = () => {
       </section>
 
       {/* Testing Process */}
-      <section className="py-16 bg-accent/30">
+      <section className="py-16 bg-accent/5">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-foreground mb-4">4-Stage Quality Testing Process</h2>
+            <h2 className="text-3xl font-bold text-foreground mb-4">4-Stage Quality <span className="text-construction-orange">Testing Process</span></h2>
             <p className="text-muted-foreground">
               Comprehensive quality assurance at every stage of the supply chain
             </p>
           </div>
-          
+
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
             {testingProcess.map((process) => (
               <Card key={process.step} className="relative overflow-hidden">
@@ -185,12 +185,12 @@ const Quality = () => {
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-foreground mb-4">Quality Performance Metrics</h2>
+            <h2 className="text-3xl font-bold text-foreground mb-4">Quality Performance <span className="text-construction-orange">Metrics</span></h2>
             <p className="text-muted-foreground">
               Real numbers that demonstrate our commitment to excellence
             </p>
           </div>
-          
+
           <div className="grid md:grid-cols-4 gap-8 max-w-4xl mx-auto">
             {[
               { metric: "99%+", label: "Quality Pass Rate", description: "Products meeting quality standards" },
@@ -211,15 +211,15 @@ const Quality = () => {
       </section>
 
       {/* Delivery Excellence */}
-      <section className="py-16 bg-accent/30">
+      <section className="py-16 bg-accent/5">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-foreground mb-4">Delivery Excellence</h2>
+            <h2 className="text-3xl font-bold text-foreground mb-4">Delivery <span className="text-construction-orange">Excellence</span></h2>
             <p className="text-muted-foreground">
               Reliable, traceable, and timely delivery across India
             </p>
           </div>
-          
+
           <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             {deliveryFeatures.map((feature) => {
               const IconComponent = feature.icon;
@@ -289,7 +289,7 @@ const Quality = () => {
               We stand behind every product with comprehensive guarantees and support
             </p>
           </div>
-          
+
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             <Card className="border-2 border-green-200">
               <CardHeader>

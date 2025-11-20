@@ -20,7 +20,7 @@ const BenefitCards = () => {
     },
     {
       icon: Store,
-      title: "Retailers & Dealers", 
+      title: "Retailers & Dealers",
       subtitle: "Expand Without Risk",
       description: "Expand without risk — no MOQs, high margins, and inventory-free growth opportunities.",
       features: [
@@ -35,7 +35,7 @@ const BenefitCards = () => {
     {
       icon: Home,
       title: "End-Consumers & DIYers",
-      subtitle: "Build with Confidence", 
+      subtitle: "Build with Confidence",
       description: "Build confidently with quality-assured products, expert guidance, and doorstep delivery you can trust.",
       features: [
         "Quality-assured materials",
@@ -54,10 +54,10 @@ const BenefitCards = () => {
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
-            Built for Every Construction Professional
+            Built for Every <span className="text-construction-orange">Construction Professional</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Whether you're building skyscrapers or dream homes, we have tailored solutions 
+            Whether you're building skyscrapers or dream homes, we have tailored solutions
             that deliver real value to your specific needs.
           </p>
         </div>
@@ -73,7 +73,7 @@ const BenefitCards = () => {
                   <div className={`w-16 h-16 bg-gradient-to-br ${benefit.gradient} rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
                     <IconComponent className="h-8 w-8 text-white" />
                   </div>
-                  
+
                   {/* Content */}
                   <h3 className="text-xl font-bold mb-2 text-foreground">
                     {benefit.title}
@@ -84,7 +84,7 @@ const BenefitCards = () => {
                   <p className="text-muted-foreground mb-6 leading-relaxed">
                     {benefit.description}
                   </p>
-                  
+
                   {/* Features List */}
                   <ul className="space-y-2 mb-8">
                     {benefit.features.map((feature, featureIndex) => (
@@ -94,7 +94,7 @@ const BenefitCards = () => {
                       </li>
                     ))}
                   </ul>
-                  
+
                   {/* CTA Button */}
                   {/* <Button variant="outline" className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300">
                     {benefit.cta}
@@ -105,7 +105,7 @@ const BenefitCards = () => {
             );
           })}
         </div>
-        
+
         {/* Bottom CTA */}
         <div className="text-center">
           {/* <Button variant="construction" size="lg">

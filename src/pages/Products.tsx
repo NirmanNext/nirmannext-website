@@ -122,9 +122,8 @@ export default function Products() {
 
       // search (name, brand, short_description, applicationArea, certification, description, tags)
       if (!q) return true;
-      const hay = `${p.name} ${p.brand} ${p.category} ${p.short_description || ""} ${
-        p.applicationArea || ""
-      } ${p.certification || ""} ${p.description || ""} ${p.tags?.join(" ") || ""}`.toLowerCase();
+      const hay = `${p.name} ${p.brand} ${p.category} ${p.short_description || ""} ${p.applicationArea || ""
+        } ${p.certification || ""} ${p.description || ""} ${p.tags?.join(" ") || ""}`.toLowerCase();
       return hay.includes(q);
     });
   }, [debouncedQuery, brandFilter, categoryFilter, appAreaFilter, availabilityFilter]);
@@ -148,7 +147,7 @@ export default function Products() {
       <section className="bg-gradient-subtle py-16 md:py-20 border-b">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            
+
             {/* === LEFT COLUMN: HEADLINE AND TEXT (lg:col-span-5) === */}
             <div className="lg:col-span-5 text-center lg:text-left">
               {/* <Badge variant="secondary" className="mb-4 px-3 py-1 text-sm font-medium text-primary bg-primary/10 border-primary/20 hover:bg-primary/15 transition-colors">
@@ -156,9 +155,9 @@ export default function Products() {
               </Badge> */}
 
               <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-foreground mb-4 leading-tight">
-                Engineered for <span className="text-primary">Precision</span>.
+                Engineered for <span className="text-construction-orange">Precision</span>.
               </h1>
-              
+
               <p className="text-lg text-muted-foreground mb-8">
                 Explore the full catalog of <span className="font-semibold text-foreground">RockGrip</span> adhesives and <span className="font-semibold text-foreground">PlasterKing</span> solutions. Search by application, certification, or product name.
               </p>
@@ -167,7 +166,7 @@ export default function Products() {
             {/* === RIGHT COLUMN: SEARCH AND FILTERS (lg:col-span-7) === */}
             <div className="lg:col-span-7 relative">
               <div className="p-6 md:p-8 bg-gray-50/70 dark:bg-slate-800/70 border border-dashed border-muted-foreground/30 rounded-xl shadow-lg shadow-primary/5 backdrop-blur-sm">
-                
+
                 {/* Search Input */}
                 <div className="relative flex w-full mb-6">
                   <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
@@ -184,59 +183,59 @@ export default function Products() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
                   {/* Brand select */}
                   <Select
-                      value={brandFilter ?? "all"}
-                      onValueChange={(v) => setBrandFilter(v === "all" ? null : v)}
+                    value={brandFilter ?? "all"}
+                    onValueChange={(v) => setBrandFilter(v === "all" ? null : v)}
                   >
-                      <SelectTrigger className="w-full bg-white dark:bg-slate-900 border-primary/10 hover:border-primary/30 focus:ring-0 h-10">
+                    <SelectTrigger className="w-full bg-white dark:bg-slate-900 border-primary/10 hover:border-primary/30 focus:ring-0 h-10">
                       <SelectValue placeholder="Brand" />
-                      </SelectTrigger>
-                      <SelectContent>
+                    </SelectTrigger>
+                    <SelectContent>
                       <SelectItem value="all">All Brands</SelectItem>
                       {uniqueBrands.map((b) => <SelectItem key={b} value={b || `brand-${b}`}>{b}</SelectItem>)}
-                      </SelectContent>
+                    </SelectContent>
                   </Select>
 
                   {/* Category select */}
                   <Select
-                      value={categoryFilter ?? "all"}
-                      onValueChange={(v) => setCategoryFilter(v === "all" ? null : v)}
+                    value={categoryFilter ?? "all"}
+                    onValueChange={(v) => setCategoryFilter(v === "all" ? null : v)}
                   >
-                      <SelectTrigger className="w-full bg-white dark:bg-slate-900 border-primary/10 hover:border-primary/30 focus:ring-0 h-10">
+                    <SelectTrigger className="w-full bg-white dark:bg-slate-900 border-primary/10 hover:border-primary/30 focus:ring-0 h-10">
                       <SelectValue placeholder="Category" />
-                      </SelectTrigger>
-                      <SelectContent>
+                    </SelectTrigger>
+                    <SelectContent>
                       <SelectItem value="all">All Categories</SelectItem>
                       {uniqueCategories.map((c) => <SelectItem key={c} value={c || `cat-${c}`}>{c}</SelectItem>)}
-                      </SelectContent>
+                    </SelectContent>
                   </Select>
 
                   {/* Application Area select */}
                   <Select
-                      value={appAreaFilter ?? "all"}
-                      onValueChange={(v) => setAppAreaFilter(v === "all" ? null : v)}
+                    value={appAreaFilter ?? "all"}
+                    onValueChange={(v) => setAppAreaFilter(v === "all" ? null : v)}
                   >
-                      <SelectTrigger className="w-full bg-white dark:bg-slate-900 border-primary/10 hover:border-primary/30 focus:ring-0 h-10">
+                    <SelectTrigger className="w-full bg-white dark:bg-slate-900 border-primary/10 hover:border-primary/30 focus:ring-0 h-10">
                       <SelectValue placeholder="Application Area" />
-                      </SelectTrigger>
-                      <SelectContent>
+                    </SelectTrigger>
+                    <SelectContent>
                       <SelectItem value="all">All Areas</SelectItem>
                       {uniqueAppAreas.map((a) => <SelectItem key={a} value={a || `area-${a}`}>{a}</SelectItem>)}
-                      </SelectContent>
+                    </SelectContent>
                   </Select>
 
                   {/* Availability */}
                   <Select
-                      value={availabilityFilter}
-                      onValueChange={(v) => setAvailabilityFilter(v || "any")}
+                    value={availabilityFilter}
+                    onValueChange={(v) => setAvailabilityFilter(v || "any")}
                   >
-                      <SelectTrigger className="w-full bg-white dark:bg-slate-900 border-primary/10 hover:border-primary/30 focus:ring-0 h-10">
+                    <SelectTrigger className="w-full bg-white dark:bg-slate-900 border-primary/10 hover:border-primary/30 focus:ring-0 h-10">
                       <SelectValue placeholder="Stock" />
-                      </SelectTrigger>
-                      <SelectContent>
+                    </SelectTrigger>
+                    <SelectContent>
                       <SelectItem value="any">Any Stock</SelectItem>
                       <SelectItem value="in">In Stock</SelectItem>
                       <SelectItem value="out">Out of Stock</SelectItem>
-                      </SelectContent>
+                    </SelectContent>
                   </Select>
                 </div>
               </div>
@@ -275,7 +274,7 @@ export default function Products() {
 
               return (
                 <Card key={p.id} className="hover:shadow-elegant transition-all">
-                  <div 
+                  <div
                     className="aspect-video bg-gray-50 flex items-center justify-center overflow-hidden relative group cursor-zoom-in"
                     onClick={() => imageUrl && setPreviewImage(imageUrl)} // 🔥 Open Image on Click
                   >
@@ -294,7 +293,7 @@ export default function Products() {
                         />
                         {/* Hint overlay */}
                         <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                            <ZoomIn className="text-gray-600 opacity-60" />
+                          <ZoomIn className="text-gray-600 opacity-60" />
                         </div>
                       </>
                     ) : (
@@ -364,7 +363,7 @@ export default function Products() {
                           Request RFQ
                         </Button> */}
                         <Button size="sm" onClick={() => {
-                          const phone = "919819992488"; 
+                          const phone = "919819992488";
                           const msg = encodeURIComponent(`Hi, I want to ask about ${p.name} (${p.id})`);
                           const waUrl = `https://wa.me/${phone}?text=${msg}`;
                           window.open(waUrl, "_blank");
@@ -401,32 +400,32 @@ export default function Products() {
 
       {/* 🔥 IMAGE VIEWER MODAL (PIP MODE) */}
       {previewImage && (
-        <div 
-            className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-200"
-            onClick={() => setPreviewImage(null)} // Close on background click
+        <div
+          className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-200"
+          onClick={() => setPreviewImage(null)} // Close on background click
         >
-            {/* Close Button */}
-            <button 
-                onClick={() => setPreviewImage(null)}
-                className="absolute top-4 right-4 p-2 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors"
-            >
-                <X className="h-8 w-8" />
-            </button>
+          {/* Close Button */}
+          <button
+            onClick={() => setPreviewImage(null)}
+            className="absolute top-4 right-4 p-2 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors"
+          >
+            <X className="h-8 w-8" />
+          </button>
 
-            {/* Image Content */}
-            <div 
-                className="relative max-w-5xl w-full max-h-[90vh] flex items-center justify-center"
-                onClick={(e) => e.stopPropagation()} // Prevent click-through
-            >
-                <img 
-                    src={previewImage} 
-                    alt="Product Preview" 
-                    className="max-w-full max-h-[85vh] object-contain rounded-md shadow-2xl"
-                />
-            </div>
+          {/* Image Content */}
+          <div
+            className="relative max-w-5xl w-full max-h-[90vh] flex items-center justify-center"
+            onClick={(e) => e.stopPropagation()} // Prevent click-through
+          >
+            <img
+              src={previewImage}
+              alt="Product Preview"
+              className="max-w-full max-h-[85vh] object-contain rounded-md shadow-2xl"
+            />
+          </div>
         </div>
       )}
-      
+
     </div>
   );
 }
