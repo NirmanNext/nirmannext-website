@@ -59,7 +59,7 @@ Ensure you have the following installed:
 
 1.  **Clone the repository**
     ```bash
-    git clone [https://github.com/amiti7/nirmannext-website.git](https://github.com/amiti7/nirmannext-website.git)
+    git clone [https://github.com/NirmanNext/nirmannext-website.git](https://github.com/NirmanNext/nirmannext-website.git)
     cd nirmannext-website
     ```
 

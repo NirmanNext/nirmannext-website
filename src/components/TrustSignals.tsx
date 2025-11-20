@@ -85,12 +85,41 @@ const TrustSignals: React.FC = () => {
 
   const { testimonials, stats, partners } = data;
 
+  // 1. Data and Structure Changes: Triple the content for seamless loop
+  const marqueeItems = [...testimonials, ...testimonials, ...testimonials];
+
   return (
     <section className="py-20 bg-gradient-construction">
+      {/* 2. CSS Marquee Implementation */}
+      <style>{`
+        @keyframes scroll-left {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-33.3333%);
+          }
+        }
+        .testimonial-marquee-container {
+          display: flex;
+          white-space: nowrap;
+          animation: scroll-left 15s linear infinite;
+        }
+        .testimonial-marquee-container:hover {
+          animation-play-state: paused;
+        }
+        .testimonial-card-item {
+          flex-shrink: 0;
+          width: 320px;
+          margin-right: 2rem;
+          white-space: normal;
+        }
+      `}</style>
+
       <div className="container mx-auto px-4">
         {/* Growth Stats */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">Trusted by Professionals</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">Trusted by <span className="text-construction-orange">Professionals</span></h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-12">
             Join a growing community of contractors, retailers, and builders who have transformed their business with NirmanNext.
           </p>
@@ -159,45 +188,52 @@ const TrustSignals: React.FC = () => {
         {/* Testimonials */}
         <div className="mb-16">
           <div className="text-center mb-12">
-            <h3 className="text-2xl md:text-3xl font-bold mb-4 text-foreground">Real Stories from Real Professionals</h3>
+            <h3 className="text-2xl md:text-3xl font-bold mb-4 text-foreground">Real Stories from <span className="text-construction-orange">
+              Real Professionals
+            </span></h3>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               See how NirmanNext has helped professionals across India build better, faster, and more profitably.
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-3 gap-8 mb-12">
-            {testimonials.length > 0 ? (
-              testimonials.map((testimonial, index) => (
-                <Card key={index} className="group hover:shadow-elevated transition-all duration-300 transform hover:-translate-y-2 border-0 shadow-card-custom">
-                  <CardContent className="p-8">
-                    <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-6">
-                      <Quote className="h-6 w-6 text-primary" />
-                    </div>
+          {/* 3. JSX Markup Updates: Marquee Structure */}
+          <div className="overflow-hidden">
+            <div className="testimonial-marquee-container">
+              {marqueeItems.length > 0 ? (
+                marqueeItems.map((testimonial, index) => (
+                  <div key={index} className="testimonial-card-item">
+                    <Card className="group hover:shadow-elevated transition-all duration-300 transform hover:-translate-y-2 border-0 shadow-card-custom h-full">
+                      <CardContent className="p-8 flex flex-col h-full">
+                        <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-6">
+                          <Quote className="h-6 w-6 text-primary" />
+                        </div>
 
-                    <div className="flex items-center mb-4">
-                      {Array.from({ length: testimonial.rating || 0 }).map((_, i) => (
-                        <Star key={i} className="w-4 h-4 text-yellow-400" />
-                      ))}
-                    </div>
+                        <div className="flex items-center mb-4">
+                          {Array.from({ length: testimonial.rating || 0 }).map((_, i) => (
+                            <Star key={i} className="w-4 h-4 text-yellow-400" />
+                          ))}
+                        </div>
 
-                    <p className="text-muted-foreground mb-6 leading-relaxed italic">"{testimonial.quote}"</p>
+                        <p className="text-muted-foreground mb-6 leading-relaxed italic flex-grow">"{testimonial.quote}"</p>
 
-                    {testimonial.impact && (
-                      <Badge className="mb-6 bg-construction-orange text-white border-0">{testimonial.impact}</Badge>
-                    )}
+                        {testimonial.impact && (
+                          <Badge className="mb-6 bg-construction-orange text-white border-0 w-fit">{testimonial.impact}</Badge>
+                        )}
 
-                    <div className="border-t pt-6">
-                      <div className="font-semibold text-foreground">{testimonial.name}</div>
-                      <div className="text-sm text-muted-foreground">{testimonial.role}</div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))
-            ) : (
-              <div className="col-span-full p-8 text-center text-muted-foreground">
-                No testimonials available. Check back later.
-              </div>
-            )}
+                        <div className="border-t pt-6 mt-auto">
+                          <div className="font-semibold text-foreground">{testimonial.name}</div>
+                          <div className="text-sm text-muted-foreground">{testimonial.role}</div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </div>
+                ))
+              ) : (
+                <div className="w-full p-8 text-center text-muted-foreground">
+                  No testimonials available. Check back later.
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Optional Video CTA - kept commented (same as original) */}

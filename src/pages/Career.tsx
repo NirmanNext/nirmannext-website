@@ -25,12 +25,12 @@ type Role = {
 
 // Simple utility to format date
 const formatDate = (dateString?: string) => {
-    if (!dateString) return null;
-    try {
-        return new Date(dateString).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-    } catch (e) {
-        return dateString;
-    }
+  if (!dateString) return null;
+  try {
+    return new Date(dateString).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  } catch (e) {
+    return dateString;
+  }
 };
 
 const FILTER_ALL_VALUE = "__all__";
@@ -245,7 +245,7 @@ export default function Career() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">Careers</Badge>
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Build with NirmanNext</h1>
+            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Build with <span className="text-construction-orange">NirmanNext</span></h1>
             <p className="text-lg text-muted-foreground mb-6">
               Join us in building a one-stop procurement platform for construction chemicals — from private-label manufacturing to depot logistics and product experience.
             </p>
@@ -266,9 +266,9 @@ export default function Career() {
       </section>
 
       {/* Why Work With Us */}
-      <section className="py-12">
+      <section className="py-12 bg-accent/5">
         <div className="container mx-auto px-4 max-w-4xl">
-          <h2 className="text-2xl font-semibold mb-4 text-foreground">Why NirmanNext?</h2>
+          <h2 className="text-2xl font-semibold mb-4 text-foreground">Why <span className="text-construction-orange">NirmanNext</span>?</h2>
           <p className="text-muted-foreground mb-6">
             Work on real problems in construction supply chains — product quality, depot logistics, and digital procurement. We value ownership, practical engineering, and a bias for action.
           </p>
@@ -551,11 +551,11 @@ export default function Career() {
         ==============================
       */}
       {selectedRole && (
-        <div 
+        <div
           className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4 transition-opacity duration-300"
           onClick={closeRoleModal} // Close on backdrop click
         >
-          <div 
+          <div
             className="bg-background rounded-lg shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto transform scale-100 transition-transform duration-300"
             onClick={(e) => e.stopPropagation()} // Prevent modal from closing when clicking inside
           >
@@ -572,10 +572,10 @@ export default function Career() {
                     </div>
                   )}
                 </div>
-                <Button 
-                  variant="ghost" 
-                  size="icon" 
-                  onClick={closeRoleModal} 
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={closeRoleModal}
                   className="mt-1 flex-shrink-0"
                 >
                   <X className="h-5 w-5" />
@@ -612,8 +612,8 @@ export default function Career() {
               )}
 
               <div className="border-t pt-4 flex justify-end">
-                <Button 
-                  size="lg" 
+                <Button
+                  size="lg"
                   className="bg-primary"
                   onClick={() => handleApply(selectedRole)}
                 >
