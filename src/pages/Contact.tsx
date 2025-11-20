@@ -58,7 +58,7 @@ const Contact = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
-      
+
       {/* Hero Section */}
       <section className="bg-gradient-subtle py-20">
         <div className="container mx-auto px-4">
@@ -67,10 +67,10 @@ const Contact = () => {
               Contact & Support
             </Badge>
             <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6">
-              We're Here to <span className="text-primary">Help You Build</span>
+              We're Here to <span className="text-construction-orange">Help You Build</span>
             </h1>
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Have questions about products, orders, partnerships, or need technical support? 
+              Have questions about products, orders, partnerships, or need technical support?
               Our expert team is ready to assist you 24/7.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -90,15 +90,15 @@ const Contact = () => {
       </section>
 
       {/* Contact Methods */}
-      <section className="py-16">
+      <section className="py-16 bg-accent/5">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-foreground mb-4">Multiple Ways to Reach Us</h2>
+            <h2 className="text-3xl font-bold text-foreground mb-4">Multiple Ways to <span className="text-construction-orange">Reach Us</span></h2>
             <p className="text-muted-foreground">
               Choose the most convenient way to get in touch with our support team
             </p>
           </div>
-          
+
           <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
             {contactMethods.map((method) => {
               const IconComponent = method.icon;
@@ -136,12 +136,12 @@ const Contact = () => {
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-foreground mb-4">Our Locations</h2>
+            <h2 className="text-3xl font-bold text-foreground mb-4">Our <span className="text-construction-orange">Locations</span></h2>
             <p className="text-muted-foreground">
               Visit us at any of our premises for in-person support
             </p>
           </div>
-          
+
           <div className="flex flex-wrap justify-center gap-8 max-w-6xl mx-auto">
             {offices.map((office) => (
               <Card key={office.city} className="hover:shadow-elegant transition-shadow">
@@ -150,7 +150,7 @@ const Contact = () => {
                     <MapPin className="h-5 w-5 text-primary" />
                     <CardTitle className="text-lg">{office.city}</CardTitle>
                   </div>
-                <Badge className="w-fit bg-primary/10 text-primary">{office.officeType}</Badge>
+                  <Badge className="w-fit bg-primary/10 text-primary">{office.officeType}</Badge>
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <div>
@@ -173,10 +173,10 @@ const Contact = () => {
                     href={office.geoLocation}
                     target="_blank"
                     rel="noopener noreferrer"
-                  > 
-                  <Button variant="outline" size="sm" className="w-full mt-4">
-                    Get Directions
-                  </Button>
+                  >
+                    <Button variant="outline" size="sm" className="w-full mt-4">
+                      Get Directions
+                    </Button>
                   </a>
                 </CardContent>
               </Card>
@@ -188,16 +188,16 @@ const Contact = () => {
       {/* CTA Section */}
       <section className="py-16 bg-primary text-primary-foreground">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-4">Still Have Questions?</h2>
+          <h2 className="text-3xl font-bold mb-4">Still Have <span className="text-construction-orange">Questions</span>?</h2>
           <p className="text-xl mb-8 opacity-90">
             Our support team is available 24/7 to help you with any queries or concerns
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="tel:+919818069092" style={{ textDecoration: 'none' }}>
-            <Button size="lg" variant="secondary">
-              <Phone className="h-5 w-5 mr-2" />
-              Call Support
-            </Button>
+              <Button size="lg" variant="secondary">
+                <Phone className="h-5 w-5 mr-2" />
+                Call Support
+              </Button>
             </a>
             {/* <Button size="lg" variant="outline" className="bg-transparent border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
               <MessageCircle className="h-5 w-5 mr-2" />

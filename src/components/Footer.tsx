@@ -47,16 +47,16 @@ const Footer: React.FC = () => {
             <ul className="space-y-3">
               {companyLinks.map((link, index) => (
                 <li key={index}>
-                {link.href.startsWith('/') ? (
-                  <Link to={link.href} className="text-gray-400 hover:text-white transition-colors duration-300">
-                    {link.label}
-                  </Link>
-                ) : (
-                  <a href={link.href} className="text-gray-400 hover:text-white transition-colors duration-300">
-                    {link.label}
-                  </a>
-                )}
-              </li>
+                  {link.href.startsWith('/') ? (
+                    <Link to={link.href} className="text-gray-400 hover:text-white transition-colors duration-300">
+                      {link.label}
+                    </Link>
+                  ) : (
+                    <a href={link.href} className="text-gray-400 hover:text-white transition-colors duration-300">
+                      {link.label}
+                    </a>
+                  )}
+                </li>
               ))}
             </ul>
           </div>
@@ -88,12 +88,12 @@ const Footer: React.FC = () => {
               <li className="flex items-start space-x-3">
                 <LocationIcon className="w-6 h-6 flex-shrink-0 mt-1" />
                 <span>2nd Floor, Cyber Heights, Vibhuti Khand,<br />
-                Lucknow, Uttar Pradesh 226010</span>
+                  Lucknow, Uttar Pradesh 226010</span>
               </li>
               <li className="flex items-center space-x-3">
                 <PhoneIcon className="w-5 h-5 flex-shrink-0" />
                 <a href="tel:+91-9819992488"
-                className="hover:text-white transition-colors duration-300">+91-9819992488</a>
+                  className="hover:text-white transition-colors duration-300">+91-9819992488</a>
               </li>
               <li className="flex items-center space-x-3">
                 <EmailIcon className="w-5 h-5 flex-shrink-0" />

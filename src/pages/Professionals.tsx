@@ -3,13 +3,21 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle, TrendingUp, Clock, Calculator, Users, Award } from "lucide-react";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { JoinFormDialog } from "@/components/JoinFormDialog";
+import rawData from "@/data/testimonials.json";
 // import ROICalculator from "@/components/ROICalculator";
 
 
 const Professionals = () => {
   const [openForm, setOpenForm] = useState(false);
+
+  // Extract and triple testimonials for marquee
+  const marqueeItems = useMemo(() => {
+    const stories = (rawData as any).testimonials || [];
+    return [...stories, ...stories, ...stories];
+  }, []);
+
   const benefits = [
     {
       icon: TrendingUp,
@@ -41,7 +49,7 @@ const Professionals = () => {
     { feature: "Bulk Pricing", traditional: "Limited discounts", nirmanBandhu: "Up to 30% savings" },
     { feature: "Credit Terms", traditional: "Immediate payment", nirmanBandhu: "45-day credit*", tooltip: "Credit available for verified contractors; T&C apply" },
     { feature: "Delivery", traditional: "Self-pickup mostly", nirmanBandhu: "Doorstep delivery" },
-    { feature: "Quality Check", traditional: "Variable standards", nirmanBandhu: "BIS certified quality*", tooltip: "*Performance may vary by site conditions."  },
+    { feature: "Quality Check", traditional: "Variable standards", nirmanBandhu: "BIS certified quality*", tooltip: "*Performance may vary by site conditions." },
     { feature: "Technical Support", traditional: "Limited guidance", nirmanBandhu: "Expert consultation" },
     { feature: "Project Planning", traditional: "Manual estimation", nirmanBandhu: "Digital tools & calculators" }
   ];
@@ -50,7 +58,7 @@ const Professionals = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
-      
+
       {/* Hero Section */}
       <section className="bg-gradient-subtle py-20">
         <div className="container mx-auto px-4">
@@ -59,10 +67,10 @@ const Professionals = () => {
               For Construction Professionals
             </Badge>
             <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6">
-              Build Smarter with <span className="text-primary">NirmanBandhu</span>
+              Build Smarter with <span className="text-construction-orange">NirmanBandhu</span>
             </h1>
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Join thousands of contractors, builders, and architects who trust us for quality materials, 
+              Join thousands of contractors, builders, and architects who trust us for quality materials,
               competitive pricing, and reliable delivery that keeps projects on track.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -84,12 +92,12 @@ const Professionals = () => {
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-foreground mb-4">Why Professionals Choose NirmanNext</h2>
+            <h2 className="text-3xl font-bold text-foreground mb-4">Why Professionals Choose <span className="text-construction-orange">NirmanNext</span></h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               Experience the competitive advantages that help you deliver projects faster, better, and more profitably
             </p>
           </div>
-          
+
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {benefits.map((benefit) => {
               const IconComponent = benefit.icon;
@@ -113,15 +121,15 @@ const Professionals = () => {
       </section>
 
       {/* Comparison Table */}
-      <section className="py-16 bg-accent/30">
+      <section className="py-16 bg-accent/5">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-foreground mb-4">Traditional vs. NirmanBandhu Approach</h2>
+            <h2 className="text-3xl font-bold text-foreground mb-4">Traditional vs. <span className="text-construction-orange">NirmanBandhu Approach</span></h2>
             <p className="text-muted-foreground">
               See how we're transforming the construction materials supply chain
             </p>
           </div>
-          
+
           <div className="max-w-4xl mx-auto">
             <Card className="overflow-hidden">
               <div className="overflow-x-auto">
@@ -171,59 +179,73 @@ const Professionals = () => {
         </div>
       </section> */}
 
-
-
-
       {/* Partner Stories */}
-      <section className="py-16 bg-accent/30">
+      <section className="py-16">
+        {/* Marquee CSS */}
+        <style>{`
+          @keyframes scroll-left {
+            0% {
+              transform: translateX(0);
+            }
+            100% {
+              transform: translateX(-33.3333%);
+            }
+          }
+          .success-marquee-container {
+            display: flex;
+            white-space: nowrap;
+            animation: scroll-left 22.5s linear infinite;
+          }
+          .success-marquee-container:hover {
+            animation-play-state: paused;
+          }
+          .success-card-item {
+            flex-shrink: 0;
+            width: 380px;
+            margin-right: 2rem;
+            white-space: normal;
+          }
+        `}</style>
+
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-foreground mb-4">Success Stories from Our Partners</h2>
+            <h2 className="text-3xl font-bold text-foreground mb-4">Success Stories from <span className="text-construction-orange">Our Partners</span></h2>
             <p className="text-muted-foreground">
               Real results from construction professionals across India
             </p>
           </div>
-          
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {[
-              {
-                name: "Rajesh Construction",
-                location: "Lucknow",
-                project: "Multi-unit residential complex",
-                savings: "₹1.3L saved",
-                quote: "NirmanNext's bulk pricing helped us stay within budget while maintaining quality standards."
-              },
-              {
-                name: "Sharma Builders",
-                location: "Lucknow",
-                project: "Commercial office building",
-                savings: "25% cost reduction",
-                quote: "The 45-day credit terms were a game-changer for our cash flow management."
-              },
-              {
-                name: "Green Architecture",
-                location: "Kanpur",
-                project: "Sustainable housing project",
-                savings: "On-time delivery",
-                quote: "Reliable delivery schedule kept our entire project timeline on track."
-              }
-            ].map((story) => (
-              <Card key={story.name} className="hover:shadow-elegant transition-shadow">
-                <CardHeader>
-                  <div className="flex items-center gap-2 mb-2">
-                    <Users className="h-5 w-5 text-primary" />
-                    <CardTitle className="text-lg">{story.name}</CardTitle>
+
+          {/* Marquee Container */}
+          <div className="overflow-hidden">
+            <div className="success-marquee-container">
+              {marqueeItems.length > 0 ? (
+                marqueeItems.map((story: any, index: number) => (
+                  <div key={`${story.name}-${index}`} className="success-card-item">
+                    <Card className="hover:shadow-elegant transition-shadow h-full">
+                      <CardHeader>
+                        <div className="flex items-center gap-2 mb-2">
+                          <Users className="h-5 w-5 text-primary" />
+                          <CardTitle className="text-lg">{story.name}</CardTitle>
+                        </div>
+                        <CardDescription>{story.role}</CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        {story.impact && (
+                          <Badge className="mb-3 bg-green-100 text-green-800">
+                            {story.impact}
+                          </Badge>
+                        )}
+                        <p className="text-muted-foreground italic">"{story.quote}"</p>
+                      </CardContent>
+                    </Card>
                   </div>
-                  <CardDescription>{story.location} • {story.project}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Badge className="mb-3 bg-green-100 text-green-800">
-                    {story.savings}
-                  </Badge>
-                  <p className="text-muted-foreground italic">"{story.quote}"</p>
-                </CardContent>
-              </Card>
-            ))}
+                ))
+              ) : (
+                <div className="w-full p-8 text-center text-muted-foreground">
+                  No success stories available.
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </section>
@@ -236,14 +258,14 @@ const Professionals = () => {
             Join the NirmanBandhu network and start building smarter today
           </p>
           <Button size="lg" variant="secondary"
-          onClick={() => setOpenForm(true)} // ⬅️ Opens form
+            onClick={() => setOpenForm(true)} // ⬅️ Opens form
           >
             Become a Partner Today
           </Button>
         </div>
 
         {/* Form Dialog */}
-      <JoinFormDialog open={openForm} onOpenChange={setOpenForm} />
+        <JoinFormDialog open={openForm} onOpenChange={setOpenForm} />
       </section>
     </div>
   );

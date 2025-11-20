@@ -1,25 +1,39 @@
 {
   "testimonials": [
     {
-      "name": "Rajesh Kumar",
+      "name": "Rajesh Kumar Singh",
       "role": "Site Contractor",
       "rating": 5,
-      "quote": "NirmanNext has transformed how we manage our material procurement. The bulk pricing and 45-day credit has improved our cash flow significantly. We've saved over ₹2L in the last quarter alone.",
+      "quote": "Bulk pricing and 45-day credit have simplified procurement and boosted our cash flow.",
+      "impact": "₹2L+ saved in Q1"
+    },
+    {
+      "name": "Amit Kumar Singh",
+      "role": "Site Contractor",
+      "rating": 5,
+      "quote": "NirmanNext makes material procurement easy. The bulk pricing alone has saved us lakhs.",
       "impact": "₹2L+ saved in Q1"
     },
     {
       "name": "Priya Sharma",
       "role": "Material Retailer",
       "rating": 5,
-      "quote": "The private label opportunity has been a game-changer. No inventory risk, better margins, and my customers love the quality. My business has grown 40% since joining NirmanNext.",
+      "quote": "The private-label model helped me grow without inventory risk. Margins and sales increased fast.",
       "impact": "40% business growth"
     },
     {
       "name": "Amit Patel",
       "role": "Architect",
       "rating": 5,
-      "quote": "Quality consistency and delivery reliability are crucial for our projects. NirmanNext has never let us down. The material specifications are always accurate and delivery is always on time.",
+      "quote": "Consistent quality and reliable delivery have kept every project running smoothly.",
       "impact": "100% on-time delivery"
+    },
+    {
+      "name": "Gupta Hardware Store, Lucknow",
+      "role": "Material Dealer",
+      "rating": 5,
+      "quote": "In just 6 months, we increased our revenue by 150% without any additional inventory investment. NirmanNext's partnership model transformed our small hardware store into a thriving construction materials hub.",
+      "impact": "150% business growth"
     }
   ],
   "stats": [

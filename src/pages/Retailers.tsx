@@ -2,12 +2,35 @@ import Navigation from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { TrendingUp, Package, Shield, Zap, Store, HandHeart } from "lucide-react";
+import { TrendingUp, Package, Shield, Zap, Store, HandHeart, ChevronLeft, ChevronRight } from "lucide-react";
 import { JoinFormDialog } from "@/components/JoinFormDialog";
-import { useState } from "react";
+import { useState, useMemo } from "react";
+import rawData from "@/data/testimonials.json";
 
 const Retailers = () => {
   const [openForm, setOpenForm] = useState(false);
+  const [currentStoryIndex, setCurrentStoryIndex] = useState(0);
+
+  // Filter testimonials for retailers/dealers
+  const retailerStories = useMemo(() => {
+    const testimonials = (rawData as any).testimonials || [];
+    return testimonials.filter((t: any) =>
+      t.role && (t.role.toLowerCase().includes('retailer') || t.role.toLowerCase().includes('dealer'))
+    );
+  }, []);
+
+  // Navigate to next story
+  const nextStory = () => {
+    setCurrentStoryIndex((prev) => (prev + 1) % retailerStories.length);
+  };
+
+  // Navigate to previous story
+  const prevStory = () => {
+    setCurrentStoryIndex((prev) => (prev - 1 + retailerStories.length) % retailerStories.length);
+  };
+
+  const currentStory = retailerStories[currentStoryIndex];
+
   const benefits = [
     {
       icon: Package,
@@ -43,7 +66,7 @@ const Retailers = () => {
       features: ["Digital KYC", "Instant approval", "No joining fees"]
     },
     {
-      step: "2", 
+      step: "2",
       title: "Access Product Catalog",
       description: "Browse our extensive range with real-time pricing",
       features: ["1000+ products", "Live inventory", "Margin calculator"]
@@ -65,7 +88,7 @@ const Retailers = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
-      
+
       {/* Hero Section */}
       <section className="bg-gradient-subtle py-20">
         <div className="container mx-auto px-4">
@@ -74,21 +97,18 @@ const Retailers = () => {
               For Retailers & Dealers
             </Badge>
             <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6">
-              Expand Your Business <span className="text-primary">Risk-Free</span>
+              Expand Your Business <span className="text-construction-orange">Risk-Free</span>
             </h1>
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Join India's fastest-growing construction materials network. Sell premium products 
+              Join India's fastest-growing construction materials network. Sell premium products
               without inventory investment and earn higher margins.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" className="bg-primary hover:bg-primary/90"
-              onClick={() => setOpenForm(true)} // ⬅️ Opens form
+                onClick={() => setOpenForm(true)}
               >
                 Become a Partner Dealer
               </Button>
-              {/* <Button size="lg" variant="outline">
-                Download Partner Brochure
-              </Button> */}
             </div>
           </div>
         </div>
@@ -98,12 +118,12 @@ const Retailers = () => {
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-foreground mb-4">Why Partner with NirmanNext?</h2>
+            <h2 className="text-3xl font-bold text-foreground mb-4">Why Partner with <span className="text-construction-orange">NirmanNext</span>?</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               Experience the advantages of modern retail without traditional risks and investments
             </p>
           </div>
-          
+
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {benefits.map((benefit) => {
               const IconComponent = benefit.icon;
@@ -129,15 +149,15 @@ const Retailers = () => {
       </section>
 
       {/* Partner Model */}
-      <section className="py-16 bg-accent/30">
+      <section className="py-16 bg-accent/5">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-foreground mb-4">How Our Partnership Model Works</h2>
+            <h2 className="text-3xl font-bold text-foreground mb-4">How Our Partnership <span className="text-construction-orange">Model Works</span></h2>
             <p className="text-muted-foreground">
               Simple, transparent, and profitable - built for modern retailers
             </p>
           </div>
-          
+
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
             {partnerModel.map((step) => (
               <Card key={step.step} className="relative overflow-hidden">
@@ -165,47 +185,74 @@ const Retailers = () => {
         </div>
       </section>
 
-      {/* Success Story */}
+      {/* Success Story Carousel */}
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <Card className="bg-gradient-primary text-primary-foreground overflow-hidden">
-              <CardContent className="p-8 md:p-12">
-                <div className="grid md:grid-cols-2 gap-8 items-center">
-                  <div>
-                    <Store className="h-16 w-16 mb-6 opacity-90" />
-                    <h2 className="text-3xl font-bold mb-4">Success Story</h2>
-                    <h3 className="text-xl font-semibold mb-4">Gupta Hardware Store, Gurgaon</h3>
-                    <blockquote className="text-lg italic mb-6 opacity-90">
-                      "In just 6 months, we increased our revenue by 150% without any additional inventory investment. 
-                      NirmanNext's partnership model transformed our small hardware store into a thriving construction materials hub."
-                    </blockquote>
-                    <div className="flex items-center gap-4 text-sm">
-                      <Badge variant="secondary" className="bg-primary-foreground/20 text-primary-foreground">
-                        Revenue: +150%
-                      </Badge>
-                      <Badge variant="secondary" className="bg-primary-foreground/20 text-primary-foreground">
-                        Zero Investment
-                      </Badge>
+            {retailerStories.length > 0 && currentStory ? (
+              <div className="relative">
+                <Card className="bg-gradient-primary text-primary-foreground overflow-hidden min-h-[350px]">
+                  <CardContent className="p-8 md:p-12 h-full flex flex-col">
+                    <div className="flex items-center justify-between mb-6">
+                      <div className="flex items-center gap-2">
+                        <Store className="h-12 w-12 opacity-90" />
+                        <div>
+                          <h2 className="text-2xl font-bold">Success Story</h2>
+                          <p className="text-sm opacity-75">{currentStoryIndex + 1} of {retailerStories.length}</p>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  <div className="text-center">
-                    <div className="bg-primary-foreground/10 rounded-lg p-8">
-                      <div className="text-4xl font-bold mb-2">₹45L+</div>
-                      <div className="text-lg opacity-90 mb-4">Monthly Revenue</div>
-                      <div className="text-2xl font-bold mb-2">300+</div>
-                      <div className="text-lg opacity-90">Monthly Orders</div>
+
+                    <div className="flex-1 flex flex-col justify-center">
+                      <h3 className="text-xl font-semibold mb-4">{currentStory.name}</h3>
+                      <blockquote className="text-lg italic mb-6 opacity-90 line-clamp-6">
+                        "{currentStory.quote}"
+                      </blockquote>
+                      {currentStory.impact && (
+                        <Badge variant="secondary" className="bg-primary-foreground/20 text-primary-foreground w-fit">
+                          {currentStory.impact}
+                        </Badge>
+                      )}
                     </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+                  </CardContent>
+                </Card>
+
+                {/* Navigation Arrows */}
+                {retailerStories.length > 1 && (
+                  <>
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 bg-background hover:bg-background/90 border-primary/30"
+                      onClick={prevStory}
+                    >
+                      <ChevronLeft className="h-6 w-6" />
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 bg-background hover:bg-background/90 border-primary/30"
+                      onClick={nextStory}
+                    >
+                      <ChevronRight className="h-6 w-6" />
+                    </Button>
+                  </>
+                )}
+              </div>
+            ) : (
+              <Card className="bg-gradient-primary text-primary-foreground min-h-[400px]">
+                <CardContent className="p-8 text-center h-full flex flex-col items-center justify-center">
+                  <Store className="h-16 w-16 mx-auto mb-4 opacity-90" />
+                  <p className="text-lg">No retailer success stories available yet.</p>
+                </CardContent>
+              </Card>
+            )}
           </div>
         </div>
       </section>
 
       {/* Product Categories for Retailers */}
-      <section className="py-16 bg-accent/30">
+      {/* <section className="py-16 bg-accent/30">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-foreground mb-4">Product Categories Available</h2>
@@ -213,7 +260,7 @@ const Retailers = () => {
               Comprehensive range covering all construction and hardware needs
             </p>
           </div>
-          
+
           <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-6 max-w-6xl mx-auto">
             {[
               { name: "Cement & Concrete", count: "45+ products", margin: "25-35%" },
@@ -236,18 +283,18 @@ const Retailers = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Support & Training */}
-      <section className="py-16">
+      <section className="py-16 bg-accent/5">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-foreground mb-4">Complete Support System</h2>
+            <h2 className="text-3xl font-bold text-foreground mb-4">Complete <span className="text-construction-orange">Support System</span></h2>
             <p className="text-muted-foreground">
               We don't just give you products - we help you succeed
             </p>
           </div>
-          
+
           <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             {[
               {
@@ -295,22 +342,18 @@ const Retailers = () => {
       {/* CTA Section */}
       <section className="py-16 bg-primary text-primary-foreground">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-4">Ready to Transform Your Retail Business?</h2>
+          <h2 className="text-3xl font-bold mb-4">Ready to <span className="text-construction-orange">Transform</span> Your Retail Business?</h2>
           <p className="text-xl mb-8 opacity-90">
             Join hundreds of successful retailers already partnering with NirmanNext
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" variant="secondary"
-            onClick={() => setOpenForm(true)} // ⬅️ Opens form
+              onClick={() => setOpenForm(true)}
             >
               Apply for Partnership
             </Button>
-            {/* <Button size="lg" variant="outline" className="bg-transparent border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
-              Schedule a Call
-            </Button> */}
           </div>
         </div>
-          {/* Form Dialog */}
         <JoinFormDialog open={openForm} onOpenChange={setOpenForm} />
       </section>
     </div>

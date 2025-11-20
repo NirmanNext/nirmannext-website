@@ -9,7 +9,7 @@ const HowItWorks = () => {
       description: "Explore our comprehensive catalog of construction materials with smart filters for your specific needs and project requirements.",
       features: [
         "Smart category filters",
-        "Bulk pricing calculator", 
+        "Bulk pricing calculator",
         "Quality specifications",
         "Compare products"
       ]
@@ -43,18 +43,18 @@ const HowItWorks = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
-            How NirmanNext Works
+            How NirmanNext <span className="text-construction-orange">Works</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Simple, efficient, and built for professionals. Get started in minutes 
+            Simple, efficient, and built for professionals. Get started in minutes
             and experience the future of construction material procurement.
           </p>
         </div>
-        
+
         <div className="relative">
           {/* Connection Lines */}
           <div className="hidden lg:block absolute top-24 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-border to-transparent"></div>
-          
+
           <div className="grid lg:grid-cols-3 gap-8 relative">
             {steps.map((step, index) => {
               const IconComponent = step.icon;
@@ -66,13 +66,13 @@ const HowItWorks = () => {
                       {index + 1}
                     </span>
                   </div>
-                  
+
                   <CardContent className="pt-12 pb-8 px-8">
                     {/* Icon */}
                     <div className="w-16 h-16 bg-gradient-construction rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                       <IconComponent className="h-8 w-8 text-primary" />
                     </div>
-                    
+
                     {/* Content */}
                     <h3 className="text-xl font-bold mb-4 text-foreground">
                       {step.title}
@@ -80,7 +80,7 @@ const HowItWorks = () => {
                     <p className="text-muted-foreground mb-6 leading-relaxed">
                       {step.description}
                     </p>
-                    
+
                     {/* Features */}
                     <ul className="space-y-2">
                       {step.features.map((feature, featureIndex) => (
@@ -91,7 +91,7 @@ const HowItWorks = () => {
                       ))}
                     </ul>
                   </CardContent>
-                  
+
                   {/* Connection Arrow (Desktop) */}
                   {index < steps.length - 1 && (
                     <div className="hidden lg:block absolute top-24 -right-4 w-8 h-8 transform rotate-45 bg-background border-r border-b border-border"></div>
@@ -101,7 +101,7 @@ const HowItWorks = () => {
             })}
           </div>
         </div>
-        
+
         {/* Bottom CTA */}
         {/* <div className="text-center mt-16">
           <h3 className="text-2xl font-bold mb-4 text-foreground">
